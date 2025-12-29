@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 export function AdminNewsPage() {
-  const [noticia, setNoticia] = useState({ titulo: "", subtitulo: "", conteudo: "", slug: "", imagem_url: "" })
+  const [noticia, setNoticia] = useState({ titulo: "", subtitulo: "", conteudo: "", slug: "", imagem_capa_url: "" })
 
   const handleSave = async () => {
     const { error } = await supabase.from('noticias').insert([{
@@ -25,7 +25,7 @@ export function AdminNewsPage() {
       <div className="grid gap-4">
         <Input placeholder="Título da Notícia" onChange={e => setNoticia({...noticia, titulo: e.target.value})} />
         <Input placeholder="Subtítulo / Resumo" onChange={e => setNoticia({...noticia, subtitulo: e.target.value})} />
-        <Input placeholder="URL da Imagem de Capa" onChange={e => setNoticia({...noticia, imagem_url: e.target.value})} />
+        <Input placeholder="URL da Imagem de Capa" onChange={e => setNoticia({...noticia, imagem_capa_url: e.target.value})} />
         <Input placeholder="slug-da-noticia (ex: festa-padroeira-2024)" onChange={e => setNoticia({...noticia, slug: e.target.value})} />
         
         {/* Usando o componente de texto do projeto base */}

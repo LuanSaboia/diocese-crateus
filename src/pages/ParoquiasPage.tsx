@@ -1,60 +1,46 @@
+// src/pages/ParoquiasPage.tsx
 import { useEffect, useState } from "react"
 import supabase from "@/lib/supabase"
 import { ParoquiaCard } from "@/components/ParoquiaCard"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export function ParoquiasPage() {
   const [paroquias, setParoquias] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [filtroArea, setFiltroArea] = useState<string | null>(null)
 
   useEffect(() => {
-    async function getParoquias() {
-      // Busca todas as paróquias ordenadas por nome
-      const { data, error } = await supabase
+    async function fetchParoquias() {
+      const { data } = await supabase
         .from('paroquias')
         .select('*')
         .order('nome', { ascending: true })
-
-      if (error) {
-        console.error("Erro ao buscar paróquias:", error)
-      } else {
-        setParoquias(data)
-      }
-      setLoading(false)
+      if (data) setParoquias(data)
     }
-
-    getParoquias()
+    fetchParoquias()
   }, [])
 
-  if (loading) {
-    return <div className="p-10 text-center">Carregando paróquias...</div>
-  }
+  const paroquiasFiltradas = filtroArea 
+    ? paroquias.filter(p => p.area === filtroArea)
+    : paroquias
 
   return (
     <div className="container mx-auto py-10">
-      <header className="mb-10">
-        <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">Nossas Paróquias</h1>
-        <p className="text-zinc-500 mt-2">Conheça as comunidades que formam a Diocese de Crateús.</p>
-      </header>
+      <h1 className="text-4xl font-bold mb-6">Paróquias</h1>
+      
+      {/* Filtros por Área com as cores do mapa */}
+      <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+        <Button variant={!filtroArea ? "default" : "outline"} onClick={() => setFiltroArea(null)}>Todas</Button>
+        <Button className="bg-blue-500 hover:bg-blue-600 text-white" onClick={() => setFiltroArea("Norte")}>Norte</Button>
+        <Button className="bg-orange-500 hover:bg-orange-600 text-white" onClick={() => setFiltroArea("Centro")}>Centro</Button>
+        <Button className="bg-green-600 hover:bg-green-700 text-white" onClick={() => setFiltroArea("Sul")}>Sul</Button>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {paroquias.map((p) => (
-          <ParoquiaCard
-            key={p.id}
-            nome={p.nome}
-            cidade={p.cidade}
-            endereco={p.endereco}
-            imagem={p.imagem_url || "https://images.unsplash.com/photo-1548625361-6243071d7d9f"}
-            // Aqui pegamos o primeiro horário de domingo como exemplo
-            horarioMissa={p.horarios_missa?.domingo?.[0] ? `Dom às ${p.horarios_missa.domingo[0]}` : "Consulte a secretaria"}
-          />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {paroquiasFiltradas.map((p) => (
+          <ParoquiaCard key={p.id} {...p} />
         ))}
       </div>
-      
-      {paroquias.length === 0 && (
-        <div className="text-center py-20 bg-zinc-50 rounded-lg border-2 border-dashed">
-          <p className="text-zinc-400">Nenhuma paróquia encontrada no banco de dados.</p>
-        </div>
-      )}
     </div>
   )
 }
