@@ -42,10 +42,9 @@ export function NoticiaDetailPage() {
       </div>
 
       {/* CONTEÚDO DA NOTÍCIA */}
-      <div 
-        className="prose prose-zinc lg:prose-xl dark:prose-invert max-w-none 
-        prose-headings:font-bold prose-p:leading-relaxed prose-img:rounded-xl"
-        dangerouslySetInnerHTML={{ __html: noticia.conteudo }} 
+      <div
+        className="prose prose-blue dark:prose-invert max-w-none lg:prose-lg"
+        dangerouslySetInnerHTML={{ __html: noticia.conteudo }}
       />
     </article>
   )

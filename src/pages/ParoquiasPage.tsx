@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import supabase from "@/lib/supabase"
 import { ParoquiaCard } from "@/components/ParoquiaCard"
 import { Button } from "@/components/ui/button"
+import { Link } from "react-router-dom"
 
 export function ParoquiasPage() {
   const [paroquias, setParoquias] = useState<any[]>([])
@@ -37,14 +38,16 @@ export function ParoquiasPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {paroquiasFiltradas.map((p) => (
-          <ParoquiaCard
-            key={p.id}
-            nome={p.nome}
-            cidade={p.cidade}
-            endereco={p.endereco}
-            imagem={p.imagem_url}
-            horarios_missa={p.horarios_missa} // Garanta que o nome da coluna no Supabase seja este
-          />
+          <Link key={p.id} to={`/paroquias/${p.slug}`} className="block group">
+            <ParoquiaCard
+              key={p.id}
+              nome={p.nome}
+              cidade={p.cidade}
+              endereco={p.endereco}
+              imagem={p.imagem_url}
+              horarios_missa={p.horarios_missa} // Garanta que o nome da coluna no Supabase seja este
+            />
+          </Link>
         ))}
       </div>
     </div>
