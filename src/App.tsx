@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute"
 import { AdminNewsPage } from "./pages/AdminNewsPage"
 import { LoginPage } from "./pages/LoginPage"
 import { NoticiaDetailPage } from "./pages/NoticiasDetailPage"
+import { AdminDashboardPage } from "./pages/AdminDashboardPage"
 
 function App() {
   return (
@@ -28,14 +29,9 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
 
             {/* Rotas Protegidas (Admin) */}
-            <Route
-              path="/admin/publicar"
-              element={
-                <ProtectedRoute>
-                  <AdminNewsPage />
-                </ProtectedRoute>
-              }
-            />
+            <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
+            <Route path="/admin/publicar" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />

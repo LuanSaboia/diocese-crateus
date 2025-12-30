@@ -61,7 +61,7 @@ export function Footer() {
             <div className="flex gap-3 items-center">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-100">
                 <img 
-                  src="https://diocesedecrateus.com.br/wp-content/uploads/2021/01/dom-ailton.jpg" 
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQtc50Axsp5Rfz1U_5J_A2IVjZ17HJJaru44HXPAGw3Jq4uDRvG54C7FYWVrfUq-qs6hujyjbx3cJ8nT5f4gx8o2HhpPAlLEcAiqkETY8&s=10" 
                   alt="Dom Ailton" 
                   className="w-full h-full object-cover"
                 />

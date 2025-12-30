@@ -44,15 +44,19 @@ export function CleroPage() {
         {membros.filter(m => m.cargo === 'Bispo Diocesano').map(bispo => (
           <div key={bispo.id} className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-48 h-64 shrink-0 rounded-2xl overflow-hidden shadow-xl">
-              <img src={bispo.image_url} className="w-full h-full object-cover" alt={bispo.nome} />
+              <img src={bispo.imagem_url} className="w-full h-full object-cover" alt={bispo.nome} />
             </div>
             <div className="space-y-4">
               <h3 className="text-3xl font-bold">{bispo.nome}</h3>
               <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
-                {bispo.biografia || "Segundo bispo da Diocese de Crateús, nomeado pelo Papa Francisco."}
+                {bispo.biografia || "Terceiro bispo da Diocese de Crateús, nomeado pelo Papa Francisco."}
               </p>
               <div className="text-sm text-blue-600 font-semibold">
-                Ordenação Episcopal: {new Date(bispo.data_ordenacao).toLocaleDateString('pt-BR')}
+                Ordenação Episcopal: {
+                  bispo.data_ordenacao 
+                  ? new Date(bispo.data_ordenacao + 'T00:00:00').toLocaleDateString('pt-BR')
+                  : "Data não informada"
+                }
               </div>
             </div>
           </div>
@@ -66,7 +70,7 @@ export function CleroPage() {
             key={membro.id}
             nome={membro.nome}
             cargo={membro.cargo}
-            imagemUrl={membro.image_url}
+            imagemUrl={membro.imagem_url}
             paroquiaNome={membro.paroquias?.nome}
           />
         ))}

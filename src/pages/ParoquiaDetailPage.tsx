@@ -36,8 +36,8 @@ export function ParoquiaDetailPage() {
       </Link>
 
       <div className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden mb-8 shadow-lg">
-        <img 
-          src={paroquia.imagem_url || "https://images.unsplash.com/photo-1548625361-6243071d7d9f"} 
+        <img
+          src={paroquia.imagem_url || "https://images.unsplash.com/photo-1548625361-6243071d7d9f"}
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
@@ -65,27 +65,47 @@ export function ParoquiaDetailPage() {
             </h2>
             <p className="text-zinc-700 dark:text-zinc-300">{paroquia.endereco}</p>
             <p className="text-zinc-500 font-medium">{paroquia.cidade} - CE</p>
+            {/* <a 
+            href={`https://www.google.com/maps/search/?api=1&query=${paroquia.coordenadas.y},${paroquia.coordenadas.x}`} 
+            target="_blank"
+          >
+            Abrir no GPS
+          </a> */}
           </section>
         </div>
 
-        {/* LADO DIREITO: Horários (Sidebar) */}
-        <div className="bg-zinc-50 dark:bg-zinc-900 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 h-fit">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Clock className="w-5 h-5 text-blue-600" /> Horários de Missa
+        {/* LADO DIREITO: Horários de Missa Ordenados */}
+        <div className="bg-white dark:bg-zinc-900 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm h-fit">
+          <h3 className="text-lg font-bold mb-5 flex items-center gap-2 text-zinc-800 dark:text-zinc-100">
+            <Clock className="w-5 h-5 text-primary" /> Horários de Missa
           </h3>
-          
-          <div className="space-y-4">
-            {paroquia.horarios_missa?.domingo && (
-              <div>
-                <p className="font-semibold text-sm uppercase text-zinc-400">Domingo</p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {paroquia.horarios_missa.domingo.map((h: string) => (
-                    <span key={h} className="bg-white dark:bg-zinc-800 px-3 py-1 rounded-md text-sm border shadow-sm">{h}</span>
-                  ))}
-                </div>
-              </div>
-            )}
-            
+
+          <div className="grid grid-cols-1 gap-3">
+            {(() => {
+              // Definimos a ordem desejada aqui
+              const ordemDias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+
+              return ordemDias.map(dia => {
+                const horas = paroquia.horarios_missa?.[dia];
+
+                // Só renderiza se o dia existir no JSON da paróquia
+                if (!horas || horas.length === 0) return null;
+
+                return (
+                  <div key={dia} className="flex items-center justify-between gap-4 p-2 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
+                    <span className="text-[11px] font-black uppercase text-zinc-400 w-16">{dia}</span>
+                    <div className="flex flex-wrap justify-end gap-1 flex-1">
+                      {horas.map((h: string) => (
+                        <span key={h} className="bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 px-2 py-0.5 rounded text-[11px] font-medium border border-zinc-200 dark:border-zinc-700">
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              });
+            })()}
+
             {/* Se houver telefone cadastrado */}
             {paroquia.telefone && (
               <div className="pt-4 mt-4 border-t">
@@ -98,6 +118,6 @@ export function ParoquiaDetailPage() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }

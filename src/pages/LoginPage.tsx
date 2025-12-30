@@ -29,7 +29,7 @@ export function LoginPage() {
     <div className="flex items-center justify-center min-h-[80vh]">
       <Card className="w-full max-w-md border-zinc-200 dark:border-zinc-800">
         <CardHeader className="text-center">
-          <img src="/brasao.png" alt="Brasão" className="w-16 h-16 mx-auto mb-4" />
+          <img src="/diocese-logo.png" alt="Brasão" className="w-16 h-16 mx-auto mb-4" />
           <CardTitle className="text-2xl font-bold">Acesso Restrito</CardTitle>
         </CardHeader>
         <CardContent>

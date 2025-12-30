@@ -6,10 +6,28 @@ interface ParoquiaProps {
   cidade: string;
   endereco: string;
   imagem: string;
-  horarioMissa: string;
+  horarios_missa?: Record<string, string[]>; // Alterado para aceitar o JSON
 }
 
-export function ParoquiaCard({ nome, cidade, endereco, imagem, horarioMissa }: ParoquiaProps) {
+export function ParoquiaCard({ nome, cidade, endereco, imagem, horarios_missa }: ParoquiaProps) {
+
+  const renderHorarioDomingo = () => {
+    if (!horarios_missa || !horarios_missa.domingo) return null;
+
+    return (
+      <div className="flex flex-wrap gap-1 mt-1">
+        {horarios_missa.domingo.map((h) => (
+          <span
+            key={h}
+            className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-[10px] font-bold border border-blue-100 dark:border-blue-800"
+          >
+            {h}
+          </span>
+        ))}
+      </div>
+    );
+  };
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all border-zinc-200 dark:border-zinc-800">
       <div className="aspect-[16/9] overflow-hidden">
@@ -23,10 +41,17 @@ export function ParoquiaCard({ nome, cidade, endereco, imagem, horarioMissa }: P
       </CardHeader>
       <CardContent className="p-4 pt-0 space-y-3">
         <p className="text-sm text-zinc-500 line-clamp-2">{endereco}</p>
-        
-        <div className="flex items-center gap-2 p-2 bg-zinc-50 dark:bg-zinc-900 rounded-md text-sm">
-          <Clock className="w-4 h-4 text-blue-500" />
-          <span className="font-medium text-zinc-700 dark:text-zinc-300">Próxima Missa: {horarioMissa}</span>
+
+        <div className="pt-2 mt-auto border-t border-zinc-100 dark:border-zinc-800">
+          <div className="flex items-center gap-1.5 mb-1 text-zinc-500 dark:text-zinc-400">
+            <Clock className="w-3.5 h-3.5 text-primary" />
+            <span className="text-[11px] font-bold uppercase tracking-wider">Missas de Domingo</span>
+          </div>
+          {horarios_missa?.domingo ? (
+            renderHorarioDomingo()
+          ) : (
+            <span className="text-[10px] text-zinc-400 italic">Consulte a secretaria</span>
+          )}
         </div>
       </CardContent>
     </Card>

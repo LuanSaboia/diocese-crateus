@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react"
 import supabase from "@/lib/supabase"
 import { ParoquiaCard } from "@/components/ParoquiaCard"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 export function ParoquiasPage() {
@@ -20,14 +19,14 @@ export function ParoquiasPage() {
     fetchParoquias()
   }, [])
 
-  const paroquiasFiltradas = filtroArea 
+  const paroquiasFiltradas = filtroArea
     ? paroquias.filter(p => p.area === filtroArea)
     : paroquias
 
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-4xl font-bold mb-6">Paróquias</h1>
-      
+
       {/* Filtros por Área com as cores do mapa */}
       <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
         <Button variant={!filtroArea ? "default" : "outline"} onClick={() => setFiltroArea(null)}>Todas</Button>
@@ -38,7 +37,14 @@ export function ParoquiasPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {paroquiasFiltradas.map((p) => (
-          <ParoquiaCard key={p.id} {...p} />
+          <ParoquiaCard
+            key={p.id}
+            nome={p.nome}
+            cidade={p.cidade}
+            endereco={p.endereco}
+            imagem={p.imagem_url}
+            horarios_missa={p.horarios_missa} // Garanta que o nome da coluna no Supabase seja este
+          />
         ))}
       </div>
     </div>
