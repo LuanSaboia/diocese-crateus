@@ -9,13 +9,21 @@ import { Footer } from "./components/Footer"
 import { ProtectedRoute } from "./components/ProtectedRoute"
 import { AdminNewsPage } from "./pages/AdminNewsPage"
 import { LoginPage } from "./pages/LoginPage"
-import { NoticiaDetailPage } from "./pages/NoticiasDetailPage"
+import { NoticiasDetailPage } from "./pages/NoticiasDetailPage"
 import { AdminDashboardPage } from "./pages/AdminDashboardPage"
 import { AdminParoquiaForm } from "./pages/AdminParoquiaForm"
 import { AdminParoquiasPage } from "./pages/AdminParoquiasPage"
 import { AdminCleroPage } from "./pages/AdminCleroPage"
 import { AdminCleroForm } from "./pages/AdminCleroForm"
 import { CleroDetailPage } from "./pages/CleroDetailPage"
+import { InstitucionalPage } from "./pages/InstitucionalPage"
+import { AdminInstitucionalPage } from "./pages/AdminInstitucionalPage"
+import { AdminReligiosasPage } from "./pages/AdminReligiosasPage"
+import { ReligiosasPage } from "./pages/ReligiosasPage"
+import { AdminReligiosasForm } from "./pages/AdminReligiosasForm"
+import { ReligiosaDetailPage } from "./pages/ReligiosaDetailPage"
+import { ReligiosaPerfilPage } from "./pages/ReligiosaPerfilPage"
+import { AdminReligiosaMembroForm } from "./pages/AdminReligiosaMembroForm"
 
 function App() {
   return (
@@ -29,13 +37,19 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
 
             <Route path="/noticias" element={<NoticiasPage />} />
-            <Route path="/noticias/:slug" element={<NoticiaDetailPage />} />
-            
+            <Route path="/noticias/:slug" element={<NoticiasDetailPage />} />
+
             <Route path="/paroquias" element={<ParoquiasPage />} />
             <Route path="/paroquias/:slug" element={<ParoquiaDetailPage />} />
-            
+
             <Route path="/clero" element={<CleroPage />} />
             <Route path="/clero/:id" element={<CleroDetailPage />} />
+
+            <Route path="/religiosas" element={<ReligiosasPage />} />
+            <Route path="/religiosas/:id" element={<ReligiosaDetailPage />} />
+            <Route path="/religiosa-perfil/:id" element={<ReligiosaPerfilPage />} />
+
+            <Route path="/a-diocese" element={<InstitucionalPage />} />
 
             {/* Rotas Protegidas (Admin) */}
             <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
@@ -50,6 +64,14 @@ function App() {
             <Route path="/admin/clero" element={<ProtectedRoute><AdminCleroPage /></ProtectedRoute>} />
             <Route path="/admin/clero/novo" element={<ProtectedRoute><AdminCleroForm /></ProtectedRoute>} />
             <Route path="/admin/clero/editar/:id" element={<ProtectedRoute><AdminCleroForm /></ProtectedRoute>} />
+
+            <Route path="/admin/religiosas" element={<ProtectedRoute><AdminReligiosasPage /></ProtectedRoute>} />
+            <Route path="/admin/religiosas/nova" element={<ProtectedRoute><AdminReligiosasForm /></ProtectedRoute>} />
+            <Route path="/admin/religiosas/editar/:id" element={<ProtectedRoute><AdminReligiosasForm /></ProtectedRoute>} />
+            <Route path="/admin/religiosas/membro/novo" element={<ProtectedRoute><AdminReligiosaMembroForm /></ProtectedRoute>} />
+            <Route path="/admin/religiosas/membro/editar/:id" element={<ProtectedRoute><AdminReligiosaMembroForm /></ProtectedRoute>} />
+
+            <Route path="/admin/institucional" element={<ProtectedRoute><AdminInstitucionalPage /></ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />

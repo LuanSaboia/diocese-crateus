@@ -3,15 +3,17 @@ import { useNavigate } from "react-router-dom"
 import supabase from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { 
-  PlusCircle, 
-  FileText, 
-  Church, 
-  Users, 
-  Trash2, 
+import {
+  PlusCircle,
+  FileText,
+  Church,
+  Users,
+  Trash2,
   Edit,
-  ArrowRight
+  ArrowRight,
+  Search
 } from "lucide-react"
+import { Input } from "@/components/ui/input"
 
 export function AdminDashboardPage() {
   const [noticias, setNoticias] = useState<any[]>([])
@@ -25,6 +27,13 @@ export function AdminDashboardPage() {
     }
   }
 
+  const [filtro, setFiltro] = useState("");
+
+  // Crie esta variável para filtrar a lista antes do .map()
+  const noticiasFiltradas = noticias.filter(n =>
+    n.titulo.toLowerCase().includes(filtro.toLowerCase())
+  );
+
   useEffect(() => {
     async function fetchStats() {
       // Busca contagens para os cards do topo
@@ -33,7 +42,7 @@ export function AdminDashboardPage() {
         supabase.from('paroquias').select('*', { count: 'exact', head: true }),
         supabase.from('clero').select('*', { count: 'exact', head: true })
       ])
-      
+
       setCounts({
         noticias: n.count || 0,
         paroquias: p.count || 0,
@@ -45,7 +54,7 @@ export function AdminDashboardPage() {
         .from('noticias')
         .select('*')
         .order('data_publicacao', { ascending: false })
-      
+
       if (data) setNoticias(data)
     }
     fetchStats()
@@ -100,6 +109,21 @@ export function AdminDashboardPage() {
         </Card>
       </div>
 
+      <div className="flex flex-col md:flex-row gap-4 mb-6 items-center justify-between">
+        <div className="relative w-full md:max-w-sm">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
+          <Input
+            placeholder="Filtrar notícias por título..."
+            className="pl-10"
+            value={filtro}
+            onChange={(e) => setFiltro(e.target.value)}
+          />
+        </div>
+        <p className="text-sm text-zinc-500">
+          Exibindo {noticiasFiltradas.length} de {noticias.length} notícias
+        </p>
+      </div>
+
       {/* TABELA DE CONTEÚDO (Exemplo Notícias) */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
@@ -119,7 +143,7 @@ export function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {noticias.map((n) => (
+                {noticiasFiltradas.map((n) => (
                   <tr key={n.id} className="bg-white border-b dark:bg-zinc-950 dark:border-zinc-800 hover:bg-zinc-50 dark:hover:bg-zinc-900">
                     <th className="px-6 py-4 font-medium text-zinc-900 dark:text-white truncate max-w-[300px]">
                       {n.titulo}
@@ -128,17 +152,17 @@ export function AdminDashboardPage() {
                       {new Date(n.data_publicacao).toLocaleDateString('pt-BR')}
                     </td>
                     <td className="px-6 py-4 text-right flex justify-end gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="icon" 
+                      <Button
+                        variant="outline"
+                        size="icon"
                         className="h-8 w-8 text-blue-600"
                         onClick={() => navigate(`/admin/editar/${n.id}`)}
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        size="icon" 
+                      <Button
+                        variant="outline"
+                        size="icon"
                         className="h-8 w-8 text-red-600 hover:bg-red-50"
                         onClick={() => handleDelete(n.id)}
                       >

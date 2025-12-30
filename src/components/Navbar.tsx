@@ -15,6 +15,21 @@ export function Navbar() {
   const [areas, setAreas] = useState<Record<string, any[]>>({})
   const [isOpen, setIsOpen] = useState(false)
   const location = useLocation()
+  const [congregacoes, setCongregacoes] = useState<any[]>([])
+
+  useEffect(() => {
+    async function fetchCongregacoes() {
+      const { data } = await supabase
+        .from('congregacoes')
+        .select('id, nome, sigla')
+        .order('nome', { ascending: true })
+
+      if (data) {
+        setCongregacoes(data)
+      }
+    }
+    fetchCongregacoes()
+  }, [location])
 
   useEffect(() => {
     async function fetchParoquias() {
@@ -67,6 +82,22 @@ export function Navbar() {
           </Link>
 
           <div className="relative group">
+            <Link to="/a-diocese">
+              <Button variant="ghost" className="font-medium gap-1">
+                A Diocese <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />
+              </Button>
+            </Link>
+            <div className="absolute left-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
+              <div className="w-56 bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-2 flex flex-col gap-1">
+                <Link to="/a-diocese" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Nossa História</Link>
+                <Link to="/a-diocese/bispos" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Bispos Diocesanos</Link>
+                <Link to="/a-diocese/curia" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Cúria Diocesana</Link>
+                {/* Aqui entrarão os novos tópicos que você enviar */}
+              </div>
+            </div>
+          </div>
+
+          <div className="relative group">
             <Link to="/paroquias">
               <Button variant="ghost" className="font-medium gap-1">
                 Paróquias <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />
@@ -95,6 +126,40 @@ export function Navbar() {
           <Link to="/clero">
             <Button variant="ghost" className="font-medium">Clero</Button>
           </Link>
+
+          <div className="relative group">
+            <Link to="/religiosas">
+              <Button variant="ghost" className="font-medium gap-1">
+                Religiosas <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />
+              </Button>
+            </Link>
+            <div className="absolute right-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
+              <div className="w-[450px] bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-6">
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4">
+                  Congregações e Fraternidades
+                </h4>
+                <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+                  {congregacoes.map((c) => (
+                    <Link
+                      key={c.id}
+                      to={`/religiosas/${c.id}`}
+                      className="text-xs py-2 px-2 rounded-md hover:bg-zinc-100 hover:text-primary transition-all flex items-center gap-2"
+                    >
+                      <span className="bg-blue-100 text-blue-700 text-[9px] px-1.5 py-0.5 rounded font-bold shrink-0">
+                        {c.sigla || "CONG"}
+                      </span>
+                      <span className="truncate">{c.nome}</span>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-4 pt-4 border-t">
+                  <Link to="/religiosas" className="text-[10px] font-bold text-zinc-400 hover:text-blue-600 uppercase tracking-tight">
+                    Ver todas as casas religiosas →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* MOBILE */}
@@ -113,14 +178,21 @@ export function Navbar() {
                 </div>
 
                 <div className="flex-1 overflow-y-auto py-6 px-6 space-y-4">
-                  <Link to="/" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Início</Link>
-                  <Link to="/noticias" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Notícias</Link>
+                  <Link to="/" onClick={() => setIsOpen(false)} className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Início</Link>
+                  <Link to="/noticias" onClick={() => setIsOpen(false)} className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Notícias</Link>
+                  <Link to="/a-diocese" onClick={() => setIsOpen(false)} className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">A Diocese</Link>
 
+                  {/* O ACORDEÃO PRECISA ENVOLVER OS ITENS */}
                   <Accordion type="single" collapsible className="w-full">
+
+                    {/* ITEM: PARÓQUIAS */}
                     <AccordionItem value="paroquias" className="border-b">
-                      <AccordionTrigger className="text-lg font-medium py-2 hover:no-underline">Paróquias</AccordionTrigger>
+                      <AccordionTrigger className="text-lg font-medium py-2 hover:no-underline flex w-full justify-between items-center">
+                        Paróquias <ChevronDown className="w-4 h-4 opacity-50 transition-transform duration-200" />
+                      </AccordionTrigger>
                       <AccordionContent>
-                        <div className="space-y-6 pt-4">
+                        <div className="space-y-6 pt-4 pb-4">
+                          <Link to="/paroquias" onClick={() => setIsOpen(false)} className="text-sm font-bold text-blue-600 py-1">Ver todas →</Link>
                           {Object.entries(areas).map(([nomeArea, paroquias]) => (
                             <div key={nomeArea} className="space-y-2">
                               <p className={`text-[10px] font-black uppercase tracking-widest ${areaCores[nomeArea]}`}>{nomeArea}</p>
@@ -141,9 +213,31 @@ export function Navbar() {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
+
+                    {/* ITEM: RELIGIOSAS */}
+                    <AccordionItem value="religiosas" className="border-b">
+                      <AccordionTrigger className="text-lg font-medium py-2 hover:no-underline flex w-full justify-between items-center">
+                        Religiosas <ChevronDown className="w-4 h-4 opacity-50 transition-transform duration-200" />
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="flex flex-col gap-2 pt-2 pb-4 pl-2 border-l-2 ml-1">
+                          <Link to="/religiosas" onClick={() => setIsOpen(false)} className="text-sm font-bold text-blue-600 py-1">Ver todas →</Link>
+                          {congregacoes.map((c) => (
+                            <Link
+                              key={c.id}
+                              to={`/religiosas/${c.id}`}
+                              onClick={() => setIsOpen(false)}
+                              className="text-sm text-zinc-600 dark:text-zinc-400 py-1"
+                            >
+                              {c.nome}
+                            </Link>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
                   </Accordion>
 
-                  <Link to="/clero" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Clero</Link>
+                  <Link to="/clero" onClick={() => setIsOpen(false)} className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2 pt-2">Clero</Link>
 
                   <div className="pt-4">
                     <SearchCommand />
