@@ -53,9 +53,9 @@ export function CleroPage() {
               </p>
               <div className="text-sm text-blue-600 font-semibold">
                 Ordenação Episcopal: {
-                  bispo.data_ordenacao 
-                  ? new Date(bispo.data_ordenacao + 'T00:00:00').toLocaleDateString('pt-BR')
-                  : "Data não informada"
+                  bispo.data_ordenacao
+                    ? new Date(bispo.data_ordenacao + 'T00:00:00').toLocaleDateString('pt-BR')
+                    : "Data não informada"
                 }
               </div>
             </div>
@@ -67,11 +67,13 @@ export function CleroPage() {
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {membros.filter(m => m.cargo !== 'Bispo Diocesano').map((membro) => (
           <CleroCard
-            key={membro.id}
+            key={membro.id} // Mantemos a key para o React
+            id={membro.id}  // Passamos o id explicitamente para o componente
             nome={membro.nome}
             cargo={membro.cargo}
             imagemUrl={membro.imagem_url}
             paroquiaNome={membro.paroquias?.nome}
+            dataOrdenacao={membro.data_ordenacao}
           />
         ))}
       </section>

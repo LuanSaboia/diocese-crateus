@@ -9,6 +9,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@radix-ui/react-accordion"
 
 export function Navbar() {
   const [areas, setAreas] = useState<Record<string, any[]>>({})
@@ -45,7 +46,7 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-zinc-950/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        
+
         {/* LOGO E BUSCA */}
         <div className="flex items-center gap-8 lg:gap-12 flex-1">
           <Link to="/" className="flex items-center gap-2 shrink-0">
@@ -100,10 +101,55 @@ export function Navbar() {
         <div className="md:hidden">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon"><Menu className="w-6 h-6" /></Button>
+              <Button variant="ghost" size="icon">
+                <Menu className="w-6 h-6" />
+              </Button>
             </SheetTrigger>
-            <SheetContent side="right">
-              {/* Conteúdo do Menu Mobile igual ao anterior */}
+            <SheetContent side="right" className="w-[300px] sm:w-[400px] p-0">
+              <div className="flex flex-col h-full bg-white dark:bg-zinc-950">
+                <div className="p-6 border-b flex items-center gap-2">
+                  <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/m6L2KBLPVzCXW4Qn/diocese-logo-no-bk-personalizado-dOqZ2bQRjLfBZX2M.png" className="w-8 h-8 object-contain" alt="Logo" />
+                  <span className="font-bold">Diocese</span>
+                </div>
+
+                <div className="flex-1 overflow-y-auto py-6 px-6 space-y-4">
+                  <Link to="/" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Início</Link>
+                  <Link to="/noticias" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Notícias</Link>
+
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="paroquias" className="border-b">
+                      <AccordionTrigger className="text-lg font-medium py-2 hover:no-underline">Paróquias</AccordionTrigger>
+                      <AccordionContent>
+                        <div className="space-y-6 pt-4">
+                          {Object.entries(areas).map(([nomeArea, paroquias]) => (
+                            <div key={nomeArea} className="space-y-2">
+                              <p className={`text-[10px] font-black uppercase tracking-widest ${areaCores[nomeArea]}`}>{nomeArea}</p>
+                              <div className="flex flex-col gap-3 pl-2 border-l-2 ml-1">
+                                {paroquias.map(p => (
+                                  <Link
+                                    key={p.slug}
+                                    to={`/paroquias/${p.slug}`}
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-sm text-zinc-600 dark:text-zinc-400"
+                                  >
+                                    {p.nome}
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+
+                  <Link to="/clero" className="block text-lg font-medium hover:text-primary transition-colors border-b pb-2">Clero</Link>
+
+                  <div className="pt-4">
+                    <SearchCommand />
+                  </div>
+                </div>
+              </div>
             </SheetContent>
           </Sheet>
         </div>
