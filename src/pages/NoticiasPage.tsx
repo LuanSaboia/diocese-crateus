@@ -4,7 +4,7 @@ import { NewsCard } from "@/components/NewsCard" // Reutilizando o estilo que co
 
 export function NoticiasPage() {
   const [noticias, setNoticias] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchNoticias() {

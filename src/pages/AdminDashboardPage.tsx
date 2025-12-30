@@ -7,7 +7,7 @@ import { PlusCircle, FileText, Trash2, Edit } from "lucide-react"
 
 export function AdminDashboardPage() {
   const [noticias, setNoticias] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchNoticias() {

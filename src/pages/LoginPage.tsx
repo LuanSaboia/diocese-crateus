@@ -18,7 +18,7 @@ export function LoginPage() {
   }
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event, session) => {
+    supabase.auth.onAuthStateChange((session) => {
         if (session) {
         navigate("/admin/publicar")
         }
