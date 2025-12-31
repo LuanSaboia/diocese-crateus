@@ -1,4 +1,3 @@
-// src/pages/ParoquiasPage.tsx
 import { useEffect, useState } from "react"
 import supabase from "@/lib/supabase"
 import { ParoquiaCard } from "@/components/ParoquiaCard"
@@ -45,7 +44,7 @@ export function ParoquiasPage() {
               cidade={p.cidade}
               endereco={p.endereco}
               imagem={p.imagem_url}
-              horarios_missa={p.horarios_missa} // Garanta que o nome da coluna no Supabase seja este
+              horarios_missa={p.horarios_missa}
             />
           </Link>
         ))}

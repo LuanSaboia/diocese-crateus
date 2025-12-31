@@ -6,7 +6,7 @@ interface ParoquiaProps {
   cidade: string;
   endereco: string;
   imagem: string;
-  horarios_missa?: Record<string, string[]>; // Alterado para aceitar o JSON
+  horarios_missa?: Record<string, string[]>;
 }
 
 export function ParoquiaCard({ nome, cidade, endereco, imagem, horarios_missa }: ParoquiaProps) {

@@ -18,12 +18,12 @@ export function LoginPage() {
   }
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((session) => {
-        if (session) {
-        navigate("/admin/publicar")
-        }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        navigate("/admin/dashboard", { replace: true })
+      }
     })
-    }, [navigate])
+  }, [])
 
   return (
     <div className="flex items-center justify-center min-h-[80vh]">

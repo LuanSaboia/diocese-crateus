@@ -22,7 +22,6 @@ export function SearchCommand() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  // Atalho de teclado (Ctrl+K ou Cmd+K)
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -63,7 +62,6 @@ export function SearchCommand() {
       }
     }
 
-    // Debounce: espera 300ms após o usuário parar de digitar para buscar
     const timer = setTimeout(search, 300)
     return () => clearTimeout(timer)
   }, [query])

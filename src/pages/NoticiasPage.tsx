@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import supabase from "@/lib/supabase"
-import { NewsCard } from "@/components/NewsCard" // Reutilizando o estilo que conversamos
+import { NewsCard } from "@/components/NewsCard"
 
 export function NoticiasPage() {
   const [noticias, setNoticias] = useState<any[]>([])
@@ -34,7 +34,7 @@ export function NoticiasPage() {
             title={item.titulo}
             excerpt={item.subtitulo}
             date={new Date(item.data_publicacao).toLocaleDateString('pt-BR')}
-            category="Diocese" // Depois podemos buscar da tabela categorias
+            category="Diocese"
             image={item.imagem_capa_url}
             onClick={() => window.location.href = `/noticias/${item.slug}`}
           />

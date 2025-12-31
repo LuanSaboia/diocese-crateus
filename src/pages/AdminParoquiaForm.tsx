@@ -17,10 +17,8 @@ export function AdminParoquiaForm() {
         slug: "", imagem_url: "", horarios_missa: {} as any
     })
 
-    // 1. Defina os dias da semana para o Select
     const DIAS_SEMANA = ["segunda", "terça", "quarta", "quinta", "sexta", "sábado", "domingo"];
 
-    // 2. No seu componente, adicione funções para manipular essa lista
     const adicionarHorario = () => {
         const novoHorario = { ...paroquia.horarios_missa, "": [] };
         setParoquia({ ...paroquia, horarios_missa: novoHorario });
@@ -33,7 +31,7 @@ export function AdminParoquiaForm() {
     };
 
     const atualizarHorariosDoDia = (dia: string, valor: string) => {
-        // Transforma "07:00, 19:00" em ["07:00", "19:00"]
+        
         const arrayHoras = valor.split(",").map(h => h.trim()).filter(h => h !== "");
         setParoquia({
             ...paroquia,
@@ -52,7 +50,6 @@ export function AdminParoquiaForm() {
         }
     }, [id])
 
-    // Lógica de Upload para o bucket fotos-paroquia
     const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         try {
             setUploading(true)

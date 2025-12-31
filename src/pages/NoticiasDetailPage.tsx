@@ -14,7 +14,7 @@ export function NoticiasDetailPage() {
 
   useEffect(() => {
     async function fetchNoticia() {
-      // 1. Busca os dados da notícia pelo slug
+      
       const { data, error } = await supabase
         .from('noticias')
         .select('*')
@@ -29,7 +29,6 @@ export function NoticiasDetailPage() {
 
       setNoticia(data)
 
-      // 2. Busca as fotos da galeria vinculadas a esta notícia
       const { data: fotos, error: errorFotos } = await supabase
         .from('fotos_noticias')
         .select('url')

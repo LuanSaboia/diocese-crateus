@@ -82,13 +82,12 @@ export function ParoquiaDetailPage() {
 
           <div className="grid grid-cols-1 gap-3">
             {(() => {
-              // Definimos a ordem desejada aqui
+              
               const ordemDias = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
 
               return ordemDias.map(dia => {
                 const horas = paroquia.horarios_missa?.[dia];
 
-                // Só renderiza se o dia existir no JSON da paróquia
                 if (!horas || horas.length === 0) return null;
 
                 return (

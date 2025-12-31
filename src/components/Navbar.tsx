@@ -89,10 +89,9 @@ export function Navbar() {
             </Link>
             <div className="absolute left-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
               <div className="w-56 bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-2 flex flex-col gap-1">
-                <Link to="/a-diocese" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Nossa História</Link>
-                <Link to="/a-diocese/bispos" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Bispos Diocesanos</Link>
-                <Link to="/a-diocese/curia" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Cúria Diocesana</Link>
-                {/* Aqui entrarão os novos tópicos que você enviar */}
+                <Link to="/a-diocese" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Sobre a Diocese</Link>
+                <Link to="#" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Agenda Diocesana</Link>
+                <Link to="#" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Palavra do Pastor</Link>
               </div>
             </div>
           </div>

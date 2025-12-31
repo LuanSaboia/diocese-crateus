@@ -95,20 +95,16 @@ export function AdminNewsPage() {
         data_publicacao: noticia.data_publicacao || new Date().toISOString()
       }
 
-      // 1. Salva ou atualiza a notícia
       const { data: newsData, error: newsError } = id
         ? await supabase.from('noticias').update(payload).eq('id', id).select().single()
         : await supabase.from('noticias').insert([payload]).select().single()
 
       if (newsError) throw newsError
 
-      // 2. Sincroniza a galeria de fotos
-      // Primeiro removemos as referências antigas para evitar duplicados na edição
       if (id) {
         await supabase.from('fotos_noticias').delete().eq('noticia_id', id)
       }
 
-      // Se houver fotos na galeria, inserimos na nova tabela
       if (galeria.length > 0) {
         const photosPayload = galeria.map(url => ({
           noticia_id: newsData.id,

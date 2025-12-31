@@ -8,7 +8,7 @@ export function CleroPage() {
 
   useEffect(() => {
     async function fetchClero() {
-      // Busca clero e traz o nome da paróquia vinculada
+      
       const { data, error } = await supabase
         .from('clero')
         .select(`
@@ -67,8 +67,8 @@ export function CleroPage() {
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {membros.filter(m => m.cargo !== 'Bispo Diocesano').map((membro) => (
           <CleroCard
-            key={membro.id} // Mantemos a key para o React
-            id={membro.id}  // Passamos o id explicitamente para o componente
+            key={membro.id}
+            id={membro.id} 
             nome={membro.nome}
             cargo={membro.cargo}
             imagemUrl={membro.imagem_url}

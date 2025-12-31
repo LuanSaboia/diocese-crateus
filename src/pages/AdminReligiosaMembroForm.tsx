@@ -25,11 +25,10 @@ export function AdminReligiosaMembroForm() {
 
   useEffect(() => {
     async function loadInitialData() {
-      // Busca as congregações para o Select
+      
       const { data: congs } = await supabase.from('congregacoes').select('id, nome').order('nome')
       if (congs) setCongregacoes(congs)
 
-      // Se for edição, busca os dados da irmã
       if (id) {
         const { data } = await supabase.from('religiosas_membros').select('*').eq('id', id).single()
         if (data) setMembro(data)

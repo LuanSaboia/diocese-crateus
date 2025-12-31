@@ -7,21 +7,23 @@ export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Verifica a sessão atual
+    
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session)
       setLoading(false)
     })
 
-    // Escuta mudanças na autenticação (login/logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
+      setLoading(false)
     })
 
     return () => subscription.unsubscribe()
   }, [])
 
-  if (loading) return <div className="p-10 text-center">Verificando permissões...</div>
+  if (loading) {
+    return <div className="h-screen flex items-center justify-center">Verificando permissões...</div>
+  }
 
   if (!session) {
     return <Navigate to="/login" replace />
