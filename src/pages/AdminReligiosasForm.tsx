@@ -57,7 +57,7 @@ export function AdminReligiosasForm() {
   return (
     <div className="max-w-4xl mx-auto py-10 px-4 space-y-8">
       <h1 className="text-3xl font-bold flex items-center gap-2">
-        <Home className="text-blue-600" /> {id ? "Editar Congregação" : "Nova Congregação"}
+        <Home className="text-primary" /> {id ? "Editar Congregação" : "Nova Congregação"}
       </h1>
       
       <div className="grid gap-6 bg-white dark:bg-zinc-950 p-6 rounded-xl border shadow-sm">

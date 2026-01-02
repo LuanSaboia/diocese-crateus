@@ -24,10 +24,10 @@ export function CleroCard({ id, nome, cargo, paroquiaNome, imagemUrl, dataOrdena
           />
         </div>
         <CardContent className="p-5">
-          <Badge variant="secondary" className="mb-2 bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 hover:bg-blue-50">
+          <Badge variant="secondary" className="mb-2 bg-blue-50 text-primary dark:bg-primary/30 dark:text-blue-300 hover:bg-blue-50">
             {cargo}
           </Badge>
-          <h3 className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors">{nome}</h3>
+          <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{nome}</h3>
 
           <div className="space-y-2 text-sm text-zinc-500 dark:text-zinc-400">
             {paroquiaNome && (

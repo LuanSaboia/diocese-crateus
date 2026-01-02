@@ -20,7 +20,7 @@ export function ReligiosaPerfilPage() {
 
   return (
     <div className="max-w-3xl mx-auto py-20 px-4">
-      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-zinc-500 mb-10 hover:text-blue-600 transition-colors">
+      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-zinc-500 mb-10 hover:text-primary transition-colors">
         <ChevronLeft className="w-4 h-4" /> Voltar para a Fraternidade
       </button>
 
@@ -30,7 +30,7 @@ export function ReligiosaPerfilPage() {
             <img src={irma.foto_url} className="w-full h-full object-cover" />
           </div>
           <div className="space-y-2">
-            <span className="text-blue-600 font-bold uppercase text-xs tracking-widest">{irma.congregacoes.nome}</span>
+            <span className="text-primary font-bold uppercase text-xs tracking-widest">{irma.congregacoes.nome}</span>
             <h1 className="text-4xl font-bold">{irma.nome}</h1>
             <p className="text-zinc-500 italic">{irma.cargo}</p>
           </div>

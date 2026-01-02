@@ -41,8 +41,8 @@ export function ReligiosaDetailPage() {
               <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">{casa.sigla}</span>
               <h1 className="text-3xl md:text-5xl font-bold text-zinc-900 dark:text-zinc-100 italic">{casa.nome}</h1>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-zinc-500">
-                <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-blue-600"/> {casa.endereco}</div>
-                <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-blue-600"/> {casa.telefone}</div>
+                <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-primary"/> {casa.endereco}</div>
+                <div className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary"/> {casa.telefone}</div>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ export function ReligiosaDetailPage() {
       {/* Seção de Mini Cards das Religiosas */}
       <div className="container mx-auto px-4 mt-16">
         <h2 className="text-2xl font-bold mb-8 flex items-center gap-2 italic">
-          <Users className="text-blue-600" /> Religiosas da Fraternidade
+          <Users className="text-primary" /> Religiosas da Fraternidade
         </h2>
         
         {/* Scroll Horizontal para os Mini Cards */}
@@ -64,7 +64,7 @@ export function ReligiosaDetailPage() {
                   <img src={irma.foto_url || "/placeholder-sister.png"} className="w-full h-full object-cover" />
                 </div>
                 <div className="overflow-hidden">
-                  <p className="text-[10px] font-bold text-blue-600 uppercase tracking-tighter">{irma.cargo || "Religiosa"}</p>
+                  <p className="text-[10px] font-bold text-primary uppercase tracking-tighter">{irma.cargo || "Religiosa"}</p>
                   <p className="font-bold text-zinc-800 dark:text-zinc-200 truncate">{irma.nome}</p>
                   <p className="text-[10px] text-zinc-400">Ver biografia →</p>
                 </div>

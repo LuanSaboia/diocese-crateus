@@ -1,6 +1,110 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+ 
+@layer base {
+  :root {
+    /* Fundo WhiteSmoke (#F2F2F2) */
+    --background: 0 0% 95%;
+    --foreground: 222.2 84% 4.9%;
+
+    .cat-vaticano { @apply bg-yellow-500 text-black !important; }
+    .cat-bispo { @apply bg-purple-600 text-white !important; }
+    .cat-eventos { @apply bg-orange-500 text-white !important; }
+    .cat-diocese { @apply bg-blue-600 text-white !important; }
+    .cat-geral { @apply bg-zinc-500 text-white !important; }
+ 
+    .badge-outline-custom { background-color: transparent !important; }
+
+    /* Cards Brancos Puro para destacar do fundo */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    /* PRIMARY: Tomato (#F25D27) - Cor principal da marca */
+    --primary: 14 89% 55%;
+    --primary-foreground: 210 40% 98%;
+ 
+    /* SECONDARY: Gold (#F2B705) - Cor secundária */
+    --secondary: 45 96% 48%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    /* ACCENT: YellowGreen (#B7D93D) - Detalhes */
+    --accent: 73 67% 54%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    /* DESTRUCTIVE: Crimson (#F21D2F) */
+    --destructive: 355 89% 53%;
+    --destructive-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 14 89% 55%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    /* Dark Mode ajustado */
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 14 89% 55%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 45 96% 48%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 73 67% 54%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 355 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 14 89% 55%;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/*
+ALTERAÇÕES EM CÓDIGO
+
+text-blue-700 e text-blue-600 -> text-primary
+bg-blue-100 -> bg-secondary/20
+bg-blue-900 -> bg-primary
+text-blue-400 -> text-secondary
+text-purple-600 -> text-secondary
+
+CSS ANTERIOR AO ESQUEMA DE PALETA DE CORES
+
+@ -1,73 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
   :root {
@@ -71,3 +175,4 @@ body {
     @apply bg-background text-foreground;
   }
 }
+*/

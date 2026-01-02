@@ -39,8 +39,8 @@ export function CleroPage() {
       </header>
 
       {/* SEÇÃO DO BISPO */}
-      <section className="bg-blue-50/50 dark:bg-blue-900/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-800/30">
-        <h2 className="text-sm font-bold uppercase tracking-widest text-blue-600 mb-6">Bispo Diocesano</h2>
+      <section className="bg-blue-50/50 dark:bg-primary/10 p-8 rounded-3xl border border-blue-100 dark:border-blue-800/30">
+        <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-6">Bispo Diocesano</h2>
         {membros.filter(m => m.cargo === 'Bispo Diocesano').map(bispo => (
           <div key={bispo.id} className="flex flex-col md:flex-row gap-8 items-center">
             <div className="w-48 h-64 shrink-0 rounded-2xl overflow-hidden shadow-xl">
@@ -51,7 +51,7 @@ export function CleroPage() {
               <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed">
                 {bispo.biografia || "Terceiro bispo da Diocese de Crateús, nomeado pelo Papa Francisco."}
               </p>
-              <div className="text-sm text-blue-600 font-semibold">
+              <div className="text-sm text-primary font-semibold">
                 Ordenação Episcopal: {
                   bispo.data_ordenacao
                     ? new Date(bispo.data_ordenacao + 'T00:00:00').toLocaleDateString('pt-BR')

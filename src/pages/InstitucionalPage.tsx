@@ -8,7 +8,7 @@ export function InstitucionalPage() {
   return (
     <div className="bg-white dark:bg-zinc-950 min-h-screen pb-20">
       {/* Banner Principal */}
-      <div className="relative h-[350px] bg-blue-900 flex items-center justify-center text-white">
+      <div className="relative h-[350px] bg-primary flex items-center justify-center text-white">
         <div className="absolute inset-0 bg-black/50 z-10" />
         <img src="https://images.unsplash.com/photo-1438032005730-c779502df39b" className="absolute inset-0 w-full h-full object-cover opacity-40" alt="Crateús" />
         <div className="relative z-20 text-center space-y-4 px-4">
@@ -22,7 +22,7 @@ export function InstitucionalPage() {
         {/* SECÇÃO 1: HISTÓRIA */}
         <section id="historia" className="max-w-4xl mx-auto space-y-10 scroll-mt-24">
           <div className="flex items-center gap-3">
-            <History className="w-8 h-8 text-blue-600" />
+            <History className="w-8 h-8 text-primary" />
             <h2 className="text-3xl font-bold italic">Nossa Caminhada</h2>
           </div>
           <div className="prose prose-zinc dark:prose-invert max-w-none space-y-6 text-lg leading-relaxed text-zinc-700 dark:text-zinc-300">
@@ -73,12 +73,12 @@ export function InstitucionalPage() {
                             className={`w-full h-full object-cover object-top transition-all duration-500 ${isAtual ? 'grayscale-0' : 'grayscale hover:grayscale-0'}`}
                           />
                         ) : (
-                          <User className={`w-8 h-8 ${isAtual ? 'text-blue-600' : 'text-zinc-400'}`} />
+                          <User className={`w-8 h-8 ${isAtual ? 'text-primary' : 'text-zinc-400'}`} />
                         )}
                       </div>
                       <div className="flex flex-col">
                         <h4 className="font-bold text-zinc-900 dark:text-zinc-100 leading-tight">{b.nome}</h4>
-                        <p className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">{b.periodo}</p>
+                        <p className="text-[10px] font-bold text-primary uppercase tracking-widest mt-1">{b.periodo}</p>
                       </div>
                     </div>
 
@@ -109,7 +109,7 @@ export function InstitucionalPage() {
         {/* SECÇÃO 2: CÚRIA */}
         <section id="curia" className="space-y-10 scroll-mt-24">
           <div className="text-center space-y-2">
-            <Landmark className="w-10 h-10 text-blue-600 mx-auto" />
+            <Landmark className="w-10 h-10 text-primary mx-auto" />
             <h2 className="text-3xl font-bold italic">Cúria Diocesana</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -124,7 +124,7 @@ export function InstitucionalPage() {
             ].map((item, i) => (
               <Card key={i} className="border-none bg-zinc-50 dark:bg-zinc-900 shadow-sm">
                 <CardContent className="p-4">
-                  <p className="text-[10px] uppercase font-bold text-blue-600 tracking-widest">{item.c}</p>
+                  <p className="text-[10px] uppercase font-bold text-primary tracking-widest">{item.c}</p>
                   <p className="font-bold text-zinc-800 dark:text-zinc-200">{item.n}</p>
                 </CardContent>
               </Card>
@@ -137,14 +137,14 @@ export function InstitucionalPage() {
         {/* SECÇÃO 3: PASTORAIS E MOVIMENTOS */}
         <section id="pastorais" className="space-y-12 scroll-mt-24">
           <div className="flex items-center gap-3">
-            <Users className="w-8 h-8 text-blue-600" />
+            <Users className="w-8 h-8 text-primary" />
             <h2 className="text-3xl font-bold italic">Pastorais e Movimentos</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* COLUNA 1: Coordenação e Conselhos */}
             <div className="space-y-4">
-              <h3 className="font-bold text-xl flex items-center gap-2 text-blue-700">
+              <h3 className="font-bold text-xl flex items-center gap-2 text-primary">
                 <ShieldCheck className="w-5 h-5" /> Coordenação e Conselhos
               </h3>
               <div className="text-sm space-y-2 text-zinc-600 dark:text-zinc-400 leading-relaxed">
@@ -159,7 +159,7 @@ export function InstitucionalPage() {
 
             {/* COLUNA 2: Setores e Pastorais de Formação */}
             <div className="space-y-4">
-              <h3 className="font-bold text-xl flex items-center gap-2 text-blue-700">
+              <h3 className="font-bold text-xl flex items-center gap-2 text-primary">
                 <BookOpen className="w-5 h-5" /> Setores e Pastorais
               </h3>
               <div className="text-sm space-y-2 text-zinc-600 dark:text-zinc-400">
@@ -179,7 +179,7 @@ export function InstitucionalPage() {
             {/* COLUNA 3: Social, Movimentos e Comunidades */}
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="font-bold text-xl flex items-center gap-2 text-blue-700">
+                <h3 className="font-bold text-xl flex items-center gap-2 text-primary">
                   <MessageSquare className="w-5 h-5" /> Movimentos e Missão
                 </h3>
                 <div className="text-sm space-y-3 text-zinc-600 dark:text-zinc-400">
@@ -201,13 +201,13 @@ export function InstitucionalPage() {
           {/* Seção Extra: Comunidades e Descrições Sociais (Abaixo da Grid) */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-zinc-100 dark:border-zinc-800">
             <div className="p-6 bg-zinc-50 dark:bg-zinc-900 rounded-2xl">
-              <h4 className="font-bold text-blue-700 mb-2">Cáritas e Pastorais Sociais</h4>
+              <h4 className="font-bold text-primary mb-2">Cáritas e Pastorais Sociais</h4>
               <p className="text-sm text-zinc-500 leading-relaxed">
                 Atuação na promoção social, defesa de direitos, convivência com o semiárido, agricultura familiar e apoio a populações vulneráveis. Inclui a <strong>CPT</strong> (luta por justiça social e defesa da terra) e a <strong>PJR</strong> (foco na juventude do meio rural).
               </p>
             </div>
             <div className="p-6 bg-zinc-50 dark:bg-zinc-900 rounded-2xl">
-              <h4 className="font-bold text-blue-700 mb-2">Comunidades Eclesiais Missionárias</h4>
+              <h4 className="font-bold text-primary mb-2">Comunidades Eclesiais Missionárias</h4>
               <p className="text-sm text-zinc-500 leading-relaxed">
                 Metodologia eclesial que busca fazer de toda a Igreja um povo de discípulos missionários, que vive a fé em comunhão e a irradia no mundo por meio do testemunho, da liturgia e da ação social.
               </p>
@@ -231,7 +231,7 @@ export function InstitucionalPage() {
               { t: "Caminhos da Resiliência", d: "Trabalho inovador com pescadores artesanais dos sertões de Crateús.", i: <MapPin /> }
             ].map((p, i) => (
               <div key={i} className="flex gap-5">
-                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 text-blue-400">
+                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 text-secondary">
                   {p.i}
                 </div>
                 <div>
@@ -244,7 +244,7 @@ export function InstitucionalPage() {
 
           <div className="pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
-              <h4 className="font-bold text-blue-400 flex items-center gap-2 mb-4">
+              <h4 className="font-bold text-secondary flex items-center gap-2 mb-4">
                 <MapPin className="w-5 h-5" /> Formação Vocacional
               </h4>
               <p className="text-sm opacity-80"><strong>Casa Vocacional:</strong> Rua José Regino, 692 - Venâncio, Crateús.</p>

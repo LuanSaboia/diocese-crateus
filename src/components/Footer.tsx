@@ -12,14 +12,14 @@ export function Footer() {
           
           {/* COLUNA 1: IDENTIDADE */}
           <div className="space-y-4">
-            <h3 className="font-bold text-xl tracking-tight text-blue-600">
+            <h3 className="font-bold text-xl tracking-tight text-primary">
               Diocese de Crateús
             </h3>
             <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
               Caminhando juntos na fé e na caridade, a serviço do povo de Deus no sertão cearense.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-zinc-400 hover:text-blue-600 transition-colors"><Facebook className="w-5 h-5" /></a>
+              <a href="#" className="text-zinc-400 hover:text-primary transition-colors"><Facebook className="w-5 h-5" /></a>
               <a href="#" className="text-zinc-400 hover:text-pink-600 transition-colors"><Instagram className="w-5 h-5" /></a>
               <a href="#" className="text-zinc-400 hover:text-red-600 transition-colors"><Youtube className="w-5 h-5" /></a>
             </div>
@@ -29,10 +29,10 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-4 uppercase text-xs tracking-widest text-zinc-900 dark:text-zinc-100">Portal</h4>
             <ul className="space-y-2 text-sm text-zinc-500 dark:text-zinc-400">
-              <li><Link to="/noticias" className="hover:text-blue-600 transition-colors">Notícias e Artigos</Link></li>
-              <li><Link to="/paroquias" className="hover:text-blue-600 transition-colors">Encontre sua Paróquia</Link></li>
-              <li><Link to="/clero" className="hover:text-blue-600 transition-colors">Nossos Presbíteros</Link></li>
-              <li><Link to="/admin" className="hover:text-blue-600 transition-colors text-xs opacity-50">Acesso Restrito</Link></li>
+              <li><Link to="/noticias" className="hover:text-primary transition-colors">Notícias e Artigos</Link></li>
+              <li><Link to="/paroquias" className="hover:text-primary transition-colors">Encontre sua Paróquia</Link></li>
+              <li><Link to="/clero" className="hover:text-primary transition-colors">Nossos Presbíteros</Link></li>
+              <li><Link to="/admin" className="hover:text-primary transition-colors text-xs opacity-50">Acesso Restrito</Link></li>
             </ul>
           </div>
 
@@ -41,15 +41,15 @@ export function Footer() {
             <h4 className="font-bold mb-4 uppercase text-xs tracking-widest text-zinc-900 dark:text-zinc-100">Cúria Diocesana</h4>
             <ul className="space-y-3 text-sm text-zinc-500 dark:text-zinc-400">
               <li className="flex gap-2">
-                <MapPin className="w-4 h-4 shrink-0 text-blue-600" />
+                <MapPin className="w-4 h-4 shrink-0 text-primary" />
                 <span>Rua Firmino Rosa, 1064, Centro<br />Crateús - CE, 63700-000</span>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-blue-600" />
+                <Phone className="w-4 h-4 text-primary" />
                 <span>(88) 3691-0131</span>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-600" />
+                <Mail className="w-4 h-4 text-primary" />
                 <span>contato@diocesedecrateus.com.br</span>
               </li>
             </ul>
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* COLUNA 4: BISPO (MINI CARD) */}
           <div className="bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 shadow-sm">
-            <h4 className="font-bold text-xs uppercase mb-3 text-blue-600">Bispo Diocesano</h4>
+            <h4 className="font-bold text-xs uppercase mb-3 text-primary">Bispo Diocesano</h4>
             <div className="flex gap-3 items-center">
               <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-100">
                 <img 

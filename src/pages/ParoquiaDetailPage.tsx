@@ -50,7 +50,7 @@ export function ParoquiaDetailPage() {
         <div className="md:col-span-2 space-y-8">
           <section>
             <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-              <Info className="w-6 h-6 text-blue-600" /> Sobre a Paróquia
+              <Info className="w-6 h-6 text-primary" /> Sobre a Paróquia
             </h2>
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {paroquia.descricao || "Informações sobre a história e fundação desta comunidade serão adicionadas em breve."}
@@ -61,7 +61,7 @@ export function ParoquiaDetailPage() {
 
           <section>
             <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-              <MapPin className="w-6 h-6 text-blue-600" /> Localização
+              <MapPin className="w-6 h-6 text-primary" /> Localização
             </h2>
             <p className="text-zinc-700 dark:text-zinc-300">{paroquia.endereco}</p>
             <p className="text-zinc-500 font-medium">{paroquia.cidade} - CE</p>
@@ -109,7 +109,7 @@ export function ParoquiaDetailPage() {
             {paroquia.telefone && (
               <div className="pt-4 mt-4 border-t">
                 <p className="text-sm font-semibold text-zinc-400 uppercase mb-2">Contato</p>
-                <div className="flex items-center gap-2 text-blue-600 font-medium">
+                <div className="flex items-center gap-2 text-primary font-medium">
                   <Phone className="w-4 h-4" /> {paroquia.telefone}
                 </div>
               </div>

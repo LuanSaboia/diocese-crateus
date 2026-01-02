@@ -47,7 +47,7 @@ export function CleroDetailPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="p-4 bg-zinc-100 dark:bg-zinc-900 rounded-xl flex items-center gap-3">
                             <div className="p-2 bg-white dark:bg-zinc-800 rounded-lg shadow-sm">
-                                <Calendar className="w-5 h-5 text-blue-600" />
+                                <Calendar className="w-5 h-5 text-primary" />
                             </div>
                             <div>
                                 <p className="text-[10px] uppercase font-black text-zinc-400">Ordenação</p>

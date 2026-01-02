@@ -36,7 +36,7 @@ export function ReligiosasPage() {
               </div>
               <CardContent className="p-6 space-y-4">
                 <Badge className="bg-blue-600">{item.sigla || "CONGREGAÇÃO"}</Badge>
-                <h3 className="font-bold text-xl leading-tight group-hover:text-blue-600 transition-colors">
+                <h3 className="font-bold text-xl leading-tight group-hover:text-primary transition-colors">
                   {item.nome}
                 </h3>
                 
@@ -44,7 +44,7 @@ export function ReligiosasPage() {
                   <div className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {item.endereco}</div>
                 </div>
                 
-                <div className="pt-4 border-t flex justify-between items-center text-blue-600 font-bold text-xs uppercase tracking-widest">
+                <div className="pt-4 border-t flex justify-between items-center text-primary font-bold text-xs uppercase tracking-widest">
                   Ver Fraternidade
                   <ArrowRight className="w-4 h-4" />
                 </div>

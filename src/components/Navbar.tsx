@@ -90,7 +90,7 @@ export function Navbar() {
             <div className="absolute left-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
               <div className="w-56 bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-2 flex flex-col gap-1">
                 <Link to="/a-diocese" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Sobre a Diocese</Link>
-                <Link to="#" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Agenda Diocesana</Link>
+                <Link to="/agenda" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Agenda Diocesana</Link>
                 <Link to="#" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Palavra do Pastor</Link>
               </div>
             </div>
@@ -134,7 +134,7 @@ export function Navbar() {
             </Link>
             <div className="absolute right-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
               <div className="w-[450px] bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-6">
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-4">
+                <h4 className="text-[10px] font-black uppercase tracking-widest text-primary mb-4">
                   Congregações e Fraternidades
                 </h4>
                 <div className="grid grid-cols-2 gap-x-6 gap-y-1">
@@ -144,7 +144,7 @@ export function Navbar() {
                       to={`/religiosas/${c.id}`}
                       className="text-xs py-2 px-2 rounded-md hover:bg-zinc-100 hover:text-primary transition-all flex items-center gap-2"
                     >
-                      <span className="bg-blue-100 text-blue-700 text-[9px] px-1.5 py-0.5 rounded font-bold shrink-0">
+                      <span className="bg-secondary/20 text-primary text-[9px] px-1.5 py-0.5 rounded font-bold shrink-0">
                         {c.sigla || "CONG"}
                       </span>
                       <span className="truncate">{c.nome}</span>
@@ -152,7 +152,7 @@ export function Navbar() {
                   ))}
                 </div>
                 <div className="mt-4 pt-4 border-t">
-                  <Link to="/religiosas" className="text-[10px] font-bold text-zinc-400 hover:text-blue-600 uppercase tracking-tight">
+                  <Link to="/religiosas" className="text-[10px] font-bold text-zinc-400 hover:text-primary uppercase tracking-tight">
                     Ver todas as casas religiosas →
                   </Link>
                 </div>
@@ -191,7 +191,7 @@ export function Navbar() {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="space-y-6 pt-4 pb-4">
-                          <Link to="/paroquias" onClick={() => setIsOpen(false)} className="text-sm font-bold text-blue-600 py-1">Ver todas →</Link>
+                          <Link to="/paroquias" onClick={() => setIsOpen(false)} className="text-sm font-bold text-primary py-1">Ver todas →</Link>
                           {Object.entries(areas).map(([nomeArea, paroquias]) => (
                             <div key={nomeArea} className="space-y-2">
                               <p className={`text-[10px] font-black uppercase tracking-widest ${areaCores[nomeArea]}`}>{nomeArea}</p>
@@ -220,7 +220,7 @@ export function Navbar() {
                       </AccordionTrigger>
                       <AccordionContent>
                         <div className="flex flex-col gap-2 pt-2 pb-4 pl-2 border-l-2 ml-1">
-                          <Link to="/religiosas" onClick={() => setIsOpen(false)} className="text-sm font-bold text-blue-600 py-1">Ver todas →</Link>
+                          <Link to="/religiosas" onClick={() => setIsOpen(false)} className="text-sm font-bold text-primary py-1">Ver todas →</Link>
                           {congregacoes.map((c) => (
                             <Link
                               key={c.id}

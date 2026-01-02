@@ -19,7 +19,7 @@ export function ParoquiaCard({ nome, cidade, endereco, imagem, horarios_missa }:
         {horarios_missa.domingo.map((h) => (
           <span
             key={h}
-            className="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded text-[10px] font-bold border border-blue-100 dark:border-blue-800"
+            className="px-2 py-0.5 bg-blue-50 dark:bg-primary/30 text-primary dark:text-blue-300 rounded text-[10px] font-bold border border-blue-100 dark:border-blue-800"
           >
             {h}
           </span>
@@ -34,7 +34,7 @@ export function ParoquiaCard({ nome, cidade, endereco, imagem, horarios_missa }:
         <img src={imagem} alt={nome} className="w-full h-full object-cover transition-transform hover:scale-105" />
       </div>
       <CardHeader className="p-4 pb-2">
-        <div className="flex items-center gap-1 text-blue-600 text-xs font-bold uppercase mb-1">
+        <div className="flex items-center gap-1 text-primary text-xs font-bold uppercase mb-1">
           <MapPin className="w-3 h-3" /> {cidade}
         </div>
         <h3 className="text-xl font-bold leading-tight">{nome}</h3>

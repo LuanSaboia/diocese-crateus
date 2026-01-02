@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label"
 import { Loader2, Save, Image as ImageIcon, X } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { RichTextEditor } from "@/components/RichTextEditor"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 export function AdminNewsPage() {
   const { id } = useParams()
@@ -14,6 +15,16 @@ export function AdminNewsPage() {
   const [loadingData, setLoadingData] = useState(!!id)
   const [uploading, setUploading] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [categorias, setCategorias] = useState<any[]>([])
+  const [categoriaId, setCategoriaId] = useState("")
+
+  useEffect(() => {
+    async function loadCategorias() {
+      const { data } = await supabase.from('categorias').select('*').order('nome')
+      if (data) setCategorias(data)
+    }
+    loadCategorias()
+  }, [])
 
   const [noticia, setNoticia] = useState({
     titulo: "",
@@ -21,7 +32,8 @@ export function AdminNewsPage() {
     conteudo: "",
     slug: "",
     imagem_capa_url: "",
-    data_publicacao: ""
+    data_publicacao: "",
+    categoria_id: "",
   })
 
   const [galeria, setGaleria] = useState<string[]>([])
@@ -144,7 +156,7 @@ export function AdminNewsPage() {
 
         {/* Imagem de Capa */}
         <div className="space-y-3">
-          <Label className="font-bold text-blue-600">Imagem de Capa (Principal)</Label>
+          <Label className="font-bold text-primary">Imagem de Capa (Principal)</Label>
           <Tabs defaultValue={noticia.imagem_capa_url ? "url" : "upload"}>
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="upload">Upload</TabsTrigger>
@@ -182,6 +194,22 @@ export function AdminNewsPage() {
         <div className="space-y-2">
           <Label className="font-bold">Conteúdo</Label>
           <RichTextEditor content={noticia.conteudo} onChange={(html) => setNoticia({ ...noticia, conteudo: html })} />
+        </div>
+
+        <div className="space-y-2">
+          <Label>Categoria da Notícia</Label>
+          <Select value={categoriaId} onValueChange={setCategoriaId}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Selecione uma categoria" />
+            </SelectTrigger>
+            <SelectContent>
+              {categorias.map((cat) => (
+                <SelectItem key={cat.id} value={cat.id}>
+                  {cat.nome}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <Button onClick={handleSave} disabled={uploading || saving} className="w-full bg-blue-600 hover:bg-blue-700 h-12 text-white font-bold">
