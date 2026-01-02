@@ -91,7 +91,7 @@ export function Navbar() {
               <div className="w-56 bg-white dark:bg-zinc-950 border rounded-xl shadow-xl p-2 flex flex-col gap-1">
                 <Link to="/a-diocese" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Sobre a Diocese</Link>
                 <Link to="/agenda" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Agenda Diocesana</Link>
-                <Link to="#" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Palavra do Pastor</Link>
+                <Link to="/palavra-do-pastor" className="text-sm py-2 px-3 rounded-md hover:bg-zinc-100 transition-all">Palavra do Pastor</Link>
               </div>
             </div>
           </div>

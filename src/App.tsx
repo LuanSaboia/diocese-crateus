@@ -11,10 +11,8 @@ import { AdminNewsPage } from "./pages/AdminNewsPage"
 import { LoginPage } from "./pages/LoginPage"
 import { NoticiasDetailPage } from "./pages/NoticiasDetailPage"
 import { AdminDashboardPage } from "./pages/AdminDashboardPage"
-import { AdminParoquiaForm } from "./pages/AdminParoquiaForm"
 import { AdminParoquiasPage } from "./pages/AdminParoquiasPage"
 import { AdminCleroPage } from "./pages/AdminCleroPage"
-import { AdminCleroForm } from "./pages/AdminCleroForm"
 import { CleroDetailPage } from "./pages/CleroDetailPage"
 import { InstitucionalPage } from "./pages/InstitucionalPage"
 import { AdminInstitucionalPage } from "./pages/AdminInstitucionalPage"
@@ -25,6 +23,8 @@ import { ReligiosaPerfilPage } from "./pages/ReligiosaPerfilPage"
 import { AgendaPage } from "./pages/AgendaPage"
 import { AdminAgendaPage } from "./pages/AdminAgendaPage"
 import { AdminReligiosaPage } from "./pages/AdminReligiosaPage"
+import { PalavraPastorPage } from "./pages/PalavraPastorPage"
+import { AdminPalavraPastorPage } from "./pages/AdminPalavraPastorPage"
 
 function App() {
   return (
@@ -52,6 +52,7 @@ function App() {
             <Route path="/religiosa-perfil/:id" element={<ReligiosaPerfilPage />} />
 
             <Route path="/a-diocese" element={<InstitucionalPage />} />
+            <Route path="/palavra-do-pastor" element={<PalavraPastorPage />} />
 
             {/* Rotas Protegidas (Admin) */}
             <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
@@ -60,22 +61,12 @@ function App() {
             <Route path="/admin/editar/:id" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
 
             <Route path="/admin/agenda" element={<ProtectedRoute><AdminAgendaPage /></ProtectedRoute>} />
-
             <Route path="/admin/paroquias" element={<ProtectedRoute><AdminParoquiasPage /></ProtectedRoute>} />
-            <Route path="/admin/paroquias/nova" element={<ProtectedRoute><AdminParoquiaForm /></ProtectedRoute>} />
-            <Route path="/admin/paroquias/editar/:id" element={<ProtectedRoute><AdminParoquiaForm /></ProtectedRoute>} />
-
             <Route path="/admin/clero" element={<ProtectedRoute><AdminCleroPage /></ProtectedRoute>} />
-            <Route path="/admin/clero/novo" element={<ProtectedRoute><AdminCleroForm /></ProtectedRoute>} />
-            <Route path="/admin/clero/editar/:id" element={<ProtectedRoute><AdminCleroForm /></ProtectedRoute>} />
-
             <Route path="/admin/congregacao" element={<ProtectedRoute><AdminCongregacaoPage /></ProtectedRoute>} />
             <Route path="/admin/religiosas" element={<ProtectedRoute><AdminReligiosaPage /></ProtectedRoute>} />
-            {/* <Route path="/admin/religiosas/editar/:id" element={<ProtectedRoute><AdminReligiosasForm /></ProtectedRoute>} />
-            <Route path="/admin/religiosas/membro/novo" element={<ProtectedRoute><AdminReligiosaMembroPage /></ProtectedRoute>} />
-            <Route path="/admin/religiosas/membro/editar/:id" element={<ProtectedRoute><AdminReligiosaMembroPage /></ProtectedRoute>} /> */}
-
             <Route path="/admin/institucional" element={<ProtectedRoute><AdminInstitucionalPage /></ProtectedRoute>} />
+            <Route path="/admin/palavra-do-pastor" element={<AdminPalavraPastorPage />} />
           </Routes>
         </main>
         <Footer />
