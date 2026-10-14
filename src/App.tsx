@@ -1,37 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Navbar } from "@/components/Navbar"
-import { HomePage } from "@/pages/HomePage"
-import { NoticiasPage } from "@/pages/NoticiasPage"
-import { ParoquiasPage } from "@/pages/ParoquiasPage"
-import { CleroPage } from "@/pages/CleroPage"
-import { ParoquiaDetailPage } from "./pages/ParoquiaDetailPage"
+import { HomePage } from "@/pages/public/HomePage"
+import { NoticiasPage } from "@/pages/public/NoticiasPage"
+import { ParoquiasPage } from "@/pages/public/ParoquiasPage"
+import { CleroPage } from "@/pages/public/CleroPage"
 import { Footer } from "./components/Footer"
 import { ProtectedRoute } from "./components/ProtectedRoute"
-import { AdminNewsPage } from "./pages/AdminNewsPage"
+import { AdminNewsPage } from "./pages/admin/AdminNewsPage"
 import { LoginPage } from "./pages/LoginPage"
-import { NoticiasDetailPage } from "./pages/NoticiasDetailPage"
-import { AdminDashboardPage } from "./pages/AdminDashboardPage"
-import { AdminParoquiasPage } from "./pages/AdminParoquiasPage"
-import { AdminCleroPage } from "./pages/AdminCleroPage"
-import { CleroDetailPage } from "./pages/CleroDetailPage"
-import { InstitucionalPage } from "./pages/InstitucionalPage"
-import { AdminInstitucionalPage } from "./pages/AdminInstitucionalPage"
-import { AdminCongregacaoPage } from "./pages/AdminCongregacaoPage"
-import { ReligiosasPage } from "./pages/ReligiosasPage"
-import { ReligiosaDetailPage } from "./pages/ReligiosaDetailPage"
-import { ReligiosaPerfilPage } from "./pages/ReligiosaPerfilPage"
-import { AgendaPage } from "./pages/AgendaPage"
-import { AdminAgendaPage } from "./pages/AdminAgendaPage"
-import { AdminReligiosaPage } from "./pages/AdminReligiosaPage"
-import { PalavraPastorPage } from "./pages/PalavraPastorPage"
-import { AdminPalavraPastorPage } from "./pages/AdminPalavraPastorPage"
+import { AdminDashboardPage } from "./pages/admin/AdminDashboardPage"
+import { AdminParoquiasPage } from "./pages/admin/AdminParoquiasPage"
+import { AdminCleroPage } from "./pages/admin/AdminCleroPage"
+import { InstitucionalPage } from "./pages/public/InstitucionalPage"
+import { AdminInstitucionalPage } from "./pages/admin/AdminInstitucionalPage"
+import { AdminCongregacaoPage } from "./pages/admin/AdminCongregacaoPage"
+import { ReligiosasPage } from "./pages/public/ReligiosasPage"
+import { AgendaPage } from "./pages/public/AgendaPage"
+import { AdminAgendaPage } from "./pages/admin/AdminAgendaPage"
+import { AdminReligiosasPage } from "./pages/admin/AdminReligiosasPage"
+import { AdminPalavraPastorPage } from "./pages/admin/AdminPalavraPastorPage"
+import { PalavraPastorPage } from "./pages/public/PalavraPastorPage"
+import { NoticiaDetailPage } from "./pages/public/NoticiaDetailPage"
+import { CleroDetailPage } from "./pages/public/CleroDetailPage"
+import { ParoquiaDetailPage } from "./pages/public/ParoquiaDetailPage"
+import { CongregacaoDetailPage } from "./pages/public/CongregacaoDetailPage"
+import { ReligiosaDetailPage } from "./pages/public/ReligiosaDetailPage"
 
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors">
+      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors flex flex-col justify-between">
         <Navbar />
-        <main className="container mx-auto px-4 py-6">
+        <main className="container mx-auto px-4 py-6 flex-1">
           <Routes>
             {/* Rotas Públicas */}
             <Route path="/" element={<HomePage />} />
@@ -39,7 +39,7 @@ function App() {
             <Route path="/agenda" element={<AgendaPage />} />
 
             <Route path="/noticias" element={<NoticiasPage />} />
-            <Route path="/noticias/:slug" element={<NoticiasDetailPage />} />
+            <Route path="/noticias/:slug" element={<NoticiaDetailPage />} />
 
             <Route path="/paroquias" element={<ParoquiasPage />} />
             <Route path="/paroquias/:slug" element={<ParoquiaDetailPage />} />
@@ -49,7 +49,7 @@ function App() {
 
             <Route path="/religiosas" element={<ReligiosasPage />} />
             <Route path="/religiosas/:id" element={<ReligiosaDetailPage />} />
-            <Route path="/religiosa-perfil/:id" element={<ReligiosaPerfilPage />} />
+            <Route path="/congregacoes/:id" element={<CongregacaoDetailPage />} />
 
             <Route path="/a-diocese" element={<InstitucionalPage />} />
             <Route path="/palavra-do-pastor" element={<PalavraPastorPage />} />
@@ -57,16 +57,16 @@ function App() {
             {/* Rotas Protegidas (Admin) */}
             <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
             <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
-            <Route path="/admin/noticias/nova" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
+            <Route path="/admin/noticias" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
             <Route path="/admin/editar/:id" element={<ProtectedRoute><AdminNewsPage /></ProtectedRoute>} />
-
             <Route path="/admin/agenda" element={<ProtectedRoute><AdminAgendaPage /></ProtectedRoute>} />
             <Route path="/admin/paroquias" element={<ProtectedRoute><AdminParoquiasPage /></ProtectedRoute>} />
             <Route path="/admin/clero" element={<ProtectedRoute><AdminCleroPage /></ProtectedRoute>} />
             <Route path="/admin/congregacao" element={<ProtectedRoute><AdminCongregacaoPage /></ProtectedRoute>} />
-            <Route path="/admin/religiosas" element={<ProtectedRoute><AdminReligiosaPage /></ProtectedRoute>} />
+            <Route path="/admin/religiosas" element={<ProtectedRoute><AdminReligiosasPage /></ProtectedRoute>} />
             <Route path="/admin/institucional" element={<ProtectedRoute><AdminInstitucionalPage /></ProtectedRoute>} />
-            <Route path="/admin/palavra-do-pastor" element={<AdminPalavraPastorPage />} />
+            <Route path="/admin/palavra-do-pastor" element={<ProtectedRoute><AdminPalavraPastorPage /></ProtectedRoute>} />
+            
           </Routes>
         </main>
         <Footer />

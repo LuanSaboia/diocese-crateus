@@ -129,7 +129,7 @@ export function Navbar() {
           <div className="relative group">
             <Link to="/religiosas">
               <Button variant="ghost" className="font-medium gap-1">
-                Religiosas <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />
+                Congregações <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />
               </Button>
             </Link>
             <div className="absolute right-0 top-full pt-2 hidden group-hover:block animate-in fade-in zoom-in-95 duration-200">
