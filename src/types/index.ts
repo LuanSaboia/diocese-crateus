@@ -9,18 +9,16 @@ export interface Categoria {
 export interface Noticia {
   id: string
   titulo: string
-  subtitulo?: string | null
-  slug: string
-  conteudo: string
-  imagem_capa_url?: string | null
-  imagem_url?: string | null
-  autor_id?: string | null
-  publicado?: boolean
-  data_publicacao: string
+  subtitulo?: string
+  conteudo?: string
+  imagem_capa_url?: string
+  categoria_id?: string
+  publicado: boolean
+  data_publicacao?: string
   created_at?: string
-  categoria_id?: string | null
-  categorias?: Categoria | null
-  resumo?: string | null
+  categorias?: {
+    nome: string
+  }
 }
 
 export interface FotoNoticia {
@@ -87,11 +85,14 @@ export interface ReligiosaMembro {
 export interface Evento {
   id: string
   titulo: string
+  descricao?: string
   data_evento: string
-  hora_evento?: string | null
-  local?: string | null
-  descricao?: string | null
-  link_inscricao?: string | null
+  hora_evento: string
+  local?: string
+  tipo_modalidade?: 'presencial' | 'virtual' | 'hibrido'
+  local_presencial?: string
+  link_virtual?: string
+  noticia_id?: string
   created_at?: string
 }
 

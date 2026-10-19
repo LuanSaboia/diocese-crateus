@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { ArrowRight, MapPin } from "lucide-react"
+import { ArrowRight, MapPin, ExternalLink } from "lucide-react"
 import type { Evento } from "@/types"
 
 interface AgendaWidgetProps {
@@ -21,9 +21,11 @@ export function AgendaWidget({ eventos }: AgendaWidgetProps) {
 
         <div className="space-y-4">
           {eventos.map((evento) => {
-            const dataObj = new Date(evento.data_evento)
-            const dia = dataObj.getUTCDate()
-            const mes = dataObj.toLocaleDateString('pt-BR', { month: 'short', timeZone: 'UTC' }).replace('.', '')
+            const dataObj = new Date(evento.data_evento || (evento as any).data_inicio)
+            const dia = !isNaN(dataObj.getTime()) ? dataObj.getUTCDate() : "--"
+            const mes = !isNaN(dataObj.getTime()) 
+              ? dataObj.toLocaleDateString('pt-BR', { month: 'short', timeZone: 'UTC' }).replace('.', '')
+              : "--"
 
             return (
               <div key={evento.id} className="group flex gap-3.5 items-start border-b border-[#f4f4f5] dark:border-[#27272a] pb-3.5 last:border-0">
@@ -40,11 +42,17 @@ export function AgendaWidget({ eventos }: AgendaWidgetProps) {
                   <h4 className="font-semibold text-sm leading-snug text-[#09090b] dark:text-[#fafafa] group-hover:text-[#2563eb] transition-colors line-clamp-2">
                     {evento.titulo}
                   </h4>
-                  {evento.local && (
+                  {(evento.local || evento.local_presencial) && (
                     <div className="flex items-center gap-1 text-xs text-[#71717a] dark:text-[#a1a1aa]">
                       <MapPin className="w-3 h-3 shrink-0" />
-                      <span className="truncate">{evento.local.split(' - ')[0]}</span>
+                      <span className="truncate">{(evento.local_presencial || evento.local || '').split(' - ')[0]}</span>
                     </div>
+                  )}
+
+                  {evento.link_virtual && (
+                    <a href={evento.link_virtual} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[11px] text-emerald-600 hover:underline">
+                      Meet <ExternalLink className="w-2.5 h-2.5" />
+                    </a>
                   )}
                 </div>
               </div>

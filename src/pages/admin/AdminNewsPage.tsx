@@ -12,11 +12,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
-import { Plus, Search, Pencil, Trash2, Newspaper, Eye, EyeOff } from "lucide-react"
+import { Plus, Search, Pencil, Trash2, Newspaper, Eye, EyeOff, Calendar } from "lucide-react"
 import { RichTextEditor } from "@/components/admin/RichTextEditor"
 import { ImageUploader } from "@/components/admin/ImageUploader"
 import { DataTablePagination } from "@/components/admin/DataTablePagination"
 import { ConfirmDeleteModal } from "@/components/admin/ConfirmDeleteModal"
+import supabase from "@/lib/supabase"
 
 export function AdminNewsPage() {
   const {
@@ -37,7 +38,7 @@ export function AdminNewsPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null)
   const [deleting, setDeleting] = useState(false)
 
-  // Estado do Formulário
+  // Estado do Formulário da Notícia
   const [formData, setFormData] = useState<Partial<Noticia>>({
     titulo: "",
     subtitulo: "",
@@ -47,13 +48,23 @@ export function AdminNewsPage() {
     publicado: true
   })
 
+  // Estado de Integração com Evento/Agenda
+  const [gerarEvento, setGerarEvento] = useState(false)
+  const [eventoData, setEventoData] = useState({
+    data_evento: "",
+    hora_evento: "09:00",
+    tipo_modalidade: "presencial" as "presencial" | "virtual" | "hibrido",
+    local_presencial: "",
+    link_virtual: ""
+  })
+
   // 1. Filtrar lista pelo termo de busca
   const noticiasFiltradas = noticias.filter(n =>
     n.titulo.toLowerCase().includes(search.toLowerCase()) ||
     (n.subtitulo && n.subtitulo.toLowerCase().includes(search.toLowerCase()))
   )
 
-  // 2. Paginação dos dados filtrados (8 itens por página)
+  // 2. Paginação dos dados filtrados
   const pagination = usePagination({
     data: noticiasFiltradas,
     itemsPerPage: 8
@@ -69,6 +80,14 @@ export function AdminNewsPage() {
       categoria_id: "",
       publicado: true
     })
+    setGerarEvento(false)
+    setEventoData({
+      data_evento: new Date().toISOString().split("T")[0],
+      hora_evento: "09:00",
+      tipo_modalidade: "presencial",
+      local_presencial: "",
+      link_virtual: ""
+    })
     setModalOpen(true)
   }
 
@@ -82,13 +101,38 @@ export function AdminNewsPage() {
       categoria_id: item.categoria_id || "",
       publicado: item.publicado
     })
+    setGerarEvento(false)
     setModalOpen(true)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const success = await saveNoticia(formData, editingNoticia?.id)
-    if (success) setModalOpen(false)
+    const result = await saveNoticia(formData, editingNoticia?.id)
+    
+    // Se ativado "Gerar Evento" no cadastro de uma nova notícia
+    if (result && gerarEvento && !editingNoticia) {
+      try {
+        const localTexto = eventoData.tipo_modalidade === 'virtual' 
+          ? 'Evento Virtual' 
+          : eventoData.local_presencial || 'Diocese de Crateús'
+
+        await supabase.from('eventos').insert({
+          titulo: formData.titulo,
+          descricao: formData.subtitulo || formData.titulo,
+          data_evento: eventoData.data_evento,
+          hora_evento: eventoData.hora_evento,
+          local: localTexto,
+          tipo_modalidade: eventoData.tipo_modalidade,
+          local_presencial: eventoData.local_presencial || null,
+          link_virtual: eventoData.link_virtual || null,
+          noticia_id: (result as any)?.id || null
+        })
+      } catch (err) {
+        console.error("Erro ao gerar evento da notícia:", err)
+      }
+    }
+
+    if (result) setModalOpen(false)
   }
 
   const handleConfirmDelete = async () => {
@@ -127,7 +171,7 @@ export function AdminNewsPage() {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value)
-            pagination.goToPage(1) // Volta para a primeira página ao pesquisar
+            pagination.goToPage(1)
           }}
           className="pl-9 text-xs"
         />
@@ -210,7 +254,6 @@ export function AdminNewsPage() {
                 </TableBody>
               </Table>
 
-              {/* PAGINAÇÃO */}
               <DataTablePagination
                 currentPage={pagination.currentPage}
                 totalPages={pagination.totalPages}
@@ -281,6 +324,100 @@ export function AdminNewsPage() {
               </div>
             </div>
 
+            {/* SEÇÃO: GERAR EVENTO NA AGENDA (APENAS NA CRIAÇÃO) */}
+            {!editingNoticia && (
+              <div className="border border-[#e4e4e7] dark:border-[#27272a] rounded-lg p-3 bg-zinc-50 dark:bg-zinc-900/50 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4 text-blue-600" />
+                    <div>
+                      <span className="font-semibold text-xs">Gerar Evento na Agenda?</span>
+                      <p className="text-[11px] text-[#71717a]">
+                        Cria automaticamente uma entrada na Agenda Diocesana vinculada a esta notícia.
+                      </p>
+                    </div>
+                  </div>
+                  <Switch
+                    checked={gerarEvento}
+                    onCheckedChange={setGerarEvento}
+                  />
+                </div>
+
+                {gerarEvento && (
+                  <div className="space-y-3 pt-2 border-t border-[#e4e4e7] dark:border-[#27272a]">
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <Label className="text-[11px]">Data do Evento *</Label>
+                        <Input
+                          type="date"
+                          required={gerarEvento}
+                          value={eventoData.data_evento}
+                          onChange={(e) => setEventoData({ ...eventoData, data_evento: e.target.value })}
+                          className="text-xs"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-[11px]">Horário *</Label>
+                        <Input
+                          type="time"
+                          required={gerarEvento}
+                          value={eventoData.hora_evento}
+                          onChange={(e) => setEventoData({ ...eventoData, hora_evento: e.target.value })}
+                          className="text-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="space-y-1">
+                        <Label className="text-[11px]">Modalidade do Evento</Label>
+                        <Select
+                          value={eventoData.tipo_modalidade}
+                          onValueChange={(val: "presencial" | "virtual" | "hibrido") =>
+                            setEventoData({ ...eventoData, tipo_modalidade: val })
+                          }
+                        >
+                          <SelectTrigger className="text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="presencial">🟢 Presencial</SelectItem>
+                            <SelectItem value="virtual">💻 Virtual / Online</SelectItem>
+                            <SelectItem value="hibrido">🔄 Híbrido (Presencial + Online)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {(eventoData.tipo_modalidade === 'presencial' || eventoData.tipo_modalidade === 'hibrido') && (
+                        <div className="space-y-1">
+                          <Label className="text-[11px]">Endereço / Local Presencial</Label>
+                          <Input
+                            placeholder="Ex: Catedral do Senhor do Bonfim"
+                            value={eventoData.local_presencial}
+                            onChange={(e) => setEventoData({ ...eventoData, local_presencial: e.target.value })}
+                            className="text-xs"
+                          />
+                        </div>
+                      )}
+                    </div>
+
+                    {(eventoData.tipo_modalidade === 'virtual' || eventoData.tipo_modalidade === 'hibrido') && (
+                      <div className="space-y-1">
+                        <Label className="text-[11px]">Link da Transmissão ou Reunião (Meet / Zoom / YouTube)</Label>
+                        <Input
+                          type="url"
+                          placeholder="https://meet.google.com/abc-defg-hij"
+                          value={eventoData.link_virtual}
+                          onChange={(e) => setEventoData({ ...eventoData, link_virtual: e.target.value })}
+                          className="text-xs"
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
             <div className="space-y-1.5">
               <Label>Imagem de Capa</Label>
               <ImageUploader
@@ -321,7 +458,6 @@ export function AdminNewsPage() {
         </DialogContent>
       </Dialog>
 
-      {/* MODAL DE CONFIRMAÇÃO DE EXCLUSÃO */}
       <ConfirmDeleteModal
         open={!!deleteId}
         onOpenChange={(open) => !open && setDeleteId(null)}
