@@ -14,7 +14,7 @@ export interface Noticia {
   conteudo: string
   imagem_capa_url?: string | null
   autor_id?: string | null
-  publicado?: boolean | null
+  publicado?: boolean
   data_publicacao: string
   created_at?: string | null
   categoria_id?: string | null
