@@ -46,8 +46,7 @@ export function useNoticias() {
   const noticiasFiltradas = useMemo(() => {
     return noticias.filter((item) => {
       const matchesSearch = 
-        item.titulo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (item.resumo && item.resumo.toLowerCase().includes(searchQuery.toLowerCase()))
+        item.titulo.toLowerCase().includes(searchQuery.toLowerCase())
 
       const matchesCategoria = 
         selectedCategoria === "todas" || 

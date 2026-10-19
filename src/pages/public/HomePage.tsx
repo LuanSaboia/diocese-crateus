@@ -36,7 +36,7 @@ export function HomePage() {
             <Link to={`/noticias/${principal.slug}`} className="group block h-full">
               <div className="relative overflow-hidden rounded-2xl bg-[#09090b] h-full min-h-[380px] shadow-sm border border-[#e4e4e7] dark:border-[#27272a]">
                 <img 
-                  src={principal.imagem_url! || principal.imagem_capa_url!} 
+                  src={principal.imagem_capa_url!}
                   className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500" 
                   alt={principal.titulo} 
                 />
@@ -90,7 +90,7 @@ export function HomePage() {
                 
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#f4f4f5] dark:bg-[#27272a]">
                   <img 
-                    src={item.imagem_url! || item.imagem_capa_url!} 
+                    src={item.imagem_capa_url!} 
                     className="group-hover:scale-105 transition-transform duration-500 object-cover w-full h-full" 
                     alt={item.titulo}
                   />

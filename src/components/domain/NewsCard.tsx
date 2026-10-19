@@ -9,7 +9,7 @@ interface NewsCardProps {
 }
 
 export function NewsCard({ item }: NewsCardProps) {
-  const imagemCapa = item.imagem_capa_url || item.imagem_url
+  const imagemCapa = item.imagem_capa_url
 
   return (
     <Link to={`/noticias/${item.slug}`} className="group block h-full">
@@ -51,7 +51,7 @@ export function NewsCard({ item }: NewsCardProps) {
 
         <CardContent className="p-4 pt-0 space-y-3 flex-1 flex flex-col justify-between">
           <p className="text-xs text-[#71717a] dark:text-[#a1a1aa] line-clamp-2 leading-relaxed">
-            {item.subtitulo || item.resumo || item.conteudo?.replace(/<[^>]*>?/gm, '') || ""}
+            {item.subtitulo || item.conteudo?.replace(/<[^>]*>?/gm, '') || ""}
           </p>
 
           <div className="pt-3 border-t border-[#f4f4f5] dark:border-[#27272a] flex items-center justify-between text-xs font-semibold text-[#09090b] dark:text-[#fafafa] group-hover:text-[#2563eb]">
