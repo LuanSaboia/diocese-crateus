@@ -116,3 +116,17 @@ export interface Institucional {
   dados_json?: any | null
   updated_at?: string
 }
+
+export interface Banner {
+  id: string
+  titulo: string
+  subtitulo?: string | null
+  imagem_url?: string | null
+  link_destino: string
+  texto_botao?: string | null
+  cor_fundo?: string | null
+  posicao?: string | null
+  ativo?: boolean | null
+  ordem?: number | null
+  created_at?: string | null
+}

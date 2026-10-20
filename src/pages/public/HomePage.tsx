@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useHomeData } from "@/hooks/useHomeData"
 import { AgendaWidget } from "@/components/domain/AgendaWidget"
+import { BannerSlider } from "@/components/domain/BannerSlider"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, ArrowRight } from "lucide-react"
@@ -33,10 +34,10 @@ export function HomePage() {
         {/* Lado Esquerdo: Manchete Principal */}
         <div className="lg:col-span-2">
           {principal && (
-            <Link to={`/noticias/${principal.slug}`} className="group block h-full">
+            <Link to={`/noticias/${principal.slug || principal.id}`} className="group block h-full">
               <div className="relative overflow-hidden rounded-2xl bg-[#09090b] h-full min-h-[380px] shadow-sm border border-[#e4e4e7] dark:border-[#27272a]">
                 <img 
-                  src={principal.imagem_capa_url!}
+                  src={principal.imagem_capa_url!} 
                   className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500" 
                   alt={principal.titulo} 
                 />
@@ -56,7 +57,7 @@ export function HomePage() {
 
                   <div className="flex items-center gap-2 text-[#a1a1aa] text-xs font-medium">
                     <Calendar className="w-3.5 h-3.5" />
-                    <span>{new Date(principal.data_publicacao).toLocaleDateString('pt-BR')}</span>
+                    <span>{new Date(principal.data_publicacao || principal.created_at || Date.now()).toLocaleDateString('pt-BR')}</span>
                   </div>
                 </div>
               </div>
@@ -67,6 +68,21 @@ export function HomePage() {
         {/* Lado Direito: Agenda Vertical */}
         <AgendaWidget eventos={eventos} />
       </div>
+
+      {/* BANNER AUTOMÁTICO NA HOMEPAGE (items-start FIXA O ALINHAMENTO SUPERIOR) */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="md:col-span-2 space-y-2 pt-2">
+          <h3 className="text-xl font-bold tracking-tight text-[#09090b] dark:text-[#fafafa]">
+            Campanhas & Projetos Diocesanos
+          </h3>
+          <p className="text-xs text-[#71717a] dark:text-[#a1a1aa] leading-relaxed">
+            Acompanhe as iniciativas da Diocese de Crateús, projetos de evangelização e ações sociais.
+          </p>
+        </div>
+        <div className="md:col-span-1">
+          <BannerSlider tempoTrocaMs={5000} />
+        </div>
+      </section>
 
       {/* SEÇÃO: ÚLTIMAS NOTÍCIAS */}
       <section className="space-y-6">
@@ -85,7 +101,7 @@ export function HomePage() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {secundarias.map((item) => (
-            <Link key={item.id} to={`/noticias/${item.slug}`} className="group">
+            <Link key={item.id} to={`/noticias/${item.slug || item.id}`} className="group">
               <Card className="h-full border border-[#e4e4e7] dark:border-[#27272a] bg-[#ffffff] dark:bg-[#18181b] overflow-hidden rounded-xl flex flex-col shadow-sm hover:shadow-md transition-shadow">
                 
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#f4f4f5] dark:bg-[#27272a]">
@@ -105,7 +121,7 @@ export function HomePage() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-1.5 text-xs text-[#71717a] dark:text-[#a1a1aa]">
                       <Calendar className="w-3 h-3" />
-                      <span>{new Date(item.data_publicacao).toLocaleDateString('pt-BR')}</span>
+                      <span>{new Date(item.data_publicacao || item.created_at || Date.now()).toLocaleDateString('pt-BR')}</span>
                     </div>
                     
                     <CardTitle className="text-base font-bold leading-snug text-[#09090b] dark:text-[#fafafa] group-hover:text-[#2563eb] transition-colors line-clamp-2">

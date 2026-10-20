@@ -25,6 +25,7 @@ import { CleroDetailPage } from "./pages/public/CleroDetailPage"
 import { ParoquiaDetailPage } from "./pages/public/ParoquiaDetailPage"
 import { CongregacaoDetailPage } from "./pages/public/CongregacaoDetailPage"
 import { ReligiosaDetailPage } from "./pages/public/ReligiosaDetailPage"
+import { AdminBannersPage } from "./pages/admin/AdminBannersPage"
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
             <Route path="/admin/religiosas" element={<ProtectedRoute><AdminReligiosasPage /></ProtectedRoute>} />
             <Route path="/admin/institucional" element={<ProtectedRoute><AdminInstitucionalPage /></ProtectedRoute>} />
             <Route path="/admin/palavra-do-pastor" element={<ProtectedRoute><AdminPalavraPastorPage /></ProtectedRoute>} />
+            <Route path="/admin/banners" element={<AdminBannersPage />} />
             
           </Routes>
         </main>
