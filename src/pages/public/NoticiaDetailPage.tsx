@@ -4,8 +4,7 @@ import supabase from "@/lib/supabase"
 import type { Noticia } from "@/types"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardHeader, CardTitle } from "@/components/ui/card"
-import { BannerSlider } from "@/components/domain/BannerSlider" // <--- IMPORTANTE
+import { BannerSlider } from "@/components/domain/BannerSlider"
 import { ArrowLeft, Calendar, Newspaper, User, ArrowRight } from "lucide-react"
 
 export function NoticiaDetailPage() {
