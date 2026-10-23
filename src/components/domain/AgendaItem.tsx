@@ -13,7 +13,7 @@ export function AgendaItem({ evento }: AgendaItemProps) {
   const dataString = evento.data_evento || (evento as any).data_inicio || ""
   const horaString = evento.hora_evento || "00:00"
   
-  // Cria a data válida no formato ISO para conversão limpa
+  // Cria a data válida
   const dataISO = dataString.includes("T") 
     ? dataString 
     : `${dataString}T${horaString.length === 5 ? `${horaString}:00` : horaString}`
@@ -21,7 +21,7 @@ export function AgendaItem({ evento }: AgendaItemProps) {
   const dataObj = new Date(dataISO)
   const isDataValida = !isNaN(dataObj.getTime())
 
-  // 1. Gerar Link do Google Agenda com tratamento seguro
+  // Gerar Link do Google Agenda
   const gerarLinkGoogleCalendar = () => {
     if (!isDataValida) return "#"
 
@@ -35,7 +35,7 @@ export function AgendaItem({ evento }: AgendaItemProps) {
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${text}&dates=${start}/${end}&details=${details}&location=${location}`
   }
 
-  // 2. Download do arquivo .ICS para celulares
+  // Download do arquivo .ICS para celulares
   const handleDownloadICS = () => {
     if (!isDataValida) return
 

@@ -49,7 +49,7 @@ export function useAdminClero() {
       const payload = {
         nome: data.nome,
         cargo: data.cargo, // Ex: Pároco, Vigário, Reitor, Vigário Geral
-        paroquia_id: data.paroquia_id || null, // Se for null, fica sem paróquia atribuída
+        paroquia_id: data.paroquia_id || null,
         imagem_url: data.imagem_url || null,
         data_ordenacao: data.data_ordenacao || null,
         aniversario_natalicio: data.aniversario_natalicio || null,

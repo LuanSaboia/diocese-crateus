@@ -26,6 +26,8 @@ import { ParoquiaDetailPage } from "./pages/public/ParoquiaDetailPage"
 import { CongregacaoDetailPage } from "./pages/public/CongregacaoDetailPage"
 import { ReligiosaDetailPage } from "./pages/public/ReligiosaDetailPage"
 import { AdminBannersPage } from "./pages/admin/AdminBannersPage"
+import { LiturgiaPage } from "./pages/public/LiturgiaPage"
+import { GaleriaPage } from "./pages/public/GaleriaPage"
 
 function App() {
   return (
@@ -54,6 +56,10 @@ function App() {
 
             <Route path="/a-diocese" element={<InstitucionalPage />} />
             <Route path="/palavra-do-pastor" element={<PalavraPastorPage />} />
+            <Route path="/liturgia" element={<LiturgiaPage />} />
+
+            <Route path="/galeria" element={<GaleriaPage />} />
+            <Route path="/galeria/:albumId" element={<GaleriaPage />} />
 
             {/* Rotas Protegidas (Admin) */}
             <Route path="/admin" element={<ProtectedRoute><AdminDashboardPage /></ProtectedRoute>} />
@@ -68,7 +74,7 @@ function App() {
             <Route path="/admin/institucional" element={<ProtectedRoute><AdminInstitucionalPage /></ProtectedRoute>} />
             <Route path="/admin/palavra-do-pastor" element={<ProtectedRoute><AdminPalavraPastorPage /></ProtectedRoute>} />
             <Route path="/admin/banners" element={<AdminBannersPage />} />
-            
+
           </Routes>
         </main>
         <Footer />

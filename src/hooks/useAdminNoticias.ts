@@ -55,7 +55,6 @@ export function useAdminNoticias() {
           .replace(/(^-|-$)+/g, "")
       }
 
-      // PAYLOAD ALINHADO COM O SCHEMA DO BANCO
       const payload = {
         titulo: data.titulo,
         subtitulo: data.subtitulo || null,

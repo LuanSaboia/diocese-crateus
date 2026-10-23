@@ -34,7 +34,6 @@ export function SearchCommand() {
     return () => document.removeEventListener("keydown", down)
   }, [])
 
-  // Lógica de busca no Supabase
   useEffect(() => {
     if (query.trim().length < 2) {
       setResults({ noticias: [], paroquias: [], clero: [] })

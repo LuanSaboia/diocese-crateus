@@ -29,7 +29,6 @@ export function useAdminAgenda() {
     fetchEventos()
   }, [])
 
-  // Salvar ou Atualizar Evento
   const saveEvento = async (data: Partial<Evento>, id?: string) => {
     try {
       setSaving(true)
@@ -61,7 +60,6 @@ export function useAdminAgenda() {
     }
   }
 
-  // Excluir Evento
   const deleteEvento = async (id: string) => {
     if (!confirm("Tem certeza que deseja excluir este evento?")) return
 

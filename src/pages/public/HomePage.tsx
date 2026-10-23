@@ -2,9 +2,12 @@ import { Link } from "react-router-dom"
 import { useHomeData } from "@/hooks/useHomeData"
 import { AgendaWidget } from "@/components/domain/AgendaWidget"
 import { BannerSlider } from "@/components/domain/BannerSlider"
+import { SantoDoDiaWidget } from "@/components/domain/SantoDoDiaWidget"
+import { GaleriaWidget } from "@/components/domain/GaleriaWidget"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar, ArrowRight } from "lucide-react"
+import { ProjetosSection } from "@/components/domain/ProjetosSection"
 
 export function HomePage() {
   const { principal, secundarias, eventos, loading, error } = useHomeData()
@@ -27,30 +30,30 @@ export function HomePage() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-12 py-8 px-4 sm:px-6">
-      
-      {/* SEÇÃO DE DESTAQUE: MANCHETE + AGENDA LATERAL */}
+
+      {/* SEÇÃO 1: MANCHETE PRINCIPAL + AGENDA LATERAL */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-        
+
         {/* Lado Esquerdo: Manchete Principal */}
         <div className="lg:col-span-2">
           {principal && (
             <Link to={`/noticias/${principal.slug || principal.id}`} className="group block h-full">
               <div className="relative overflow-hidden rounded-2xl bg-[#09090b] h-full min-h-[380px] shadow-sm border border-[#e4e4e7] dark:border-[#27272a]">
-                <img 
-                  src={principal.imagem_capa_url!} 
-                  className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500" 
-                  alt={principal.titulo} 
+                <img
+                  src={principal.imagem_capa_url!}
+                  className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
+                  alt={principal.titulo}
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-t from-[#09090b]/90 via-[#09090b]/30 to-transparent" />
-                
+
                 <div className="absolute bottom-0 p-6 sm:p-8 space-y-3">
                   {principal.categorias && (
                     <Badge className={`${principal.categorias.cor || 'bg-[#2563eb]'} border-none text-[#ffffff] px-3 py-0.5 text-xs font-semibold`}>
                       {principal.categorias.nome}
                     </Badge>
                   )}
-                  
+
                   <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#ffffff] leading-tight group-hover:text-blue-300 transition-colors">
                     {principal.titulo}
                   </h2>
@@ -69,45 +72,50 @@ export function HomePage() {
         <AgendaWidget eventos={eventos} />
       </div>
 
-      {/* BANNER AUTOMÁTICO NA HOMEPAGE (items-start FIXA O ALINHAMENTO SUPERIOR) */}
+      {/* SEÇÃO 2: CAMPANHAS, WIDGETS DE LITURGIA & SANTO DO DIA */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        <div className="md:col-span-2 space-y-2 pt-2">
-          <h3 className="text-xl font-bold tracking-tight text-[#09090b] dark:text-[#fafafa]">
-            Campanhas & Projetos Diocesanos
-          </h3>
-          <p className="text-xs text-[#71717a] dark:text-[#a1a1aa] leading-relaxed">
-            Acompanhe as iniciativas da Diocese de Crateús, projetos de evangelização e ações sociais.
-          </p>
+        <div className="md:col-span-2 space-y-4 pt-2">
+          <div className="space-y-1">
+           
+            <ProjetosSection />
+          </div>
+          <GaleriaWidget />
         </div>
-        <div className="md:col-span-1">
+
+        <div className="md:col-span-1 flex flex-col gap-4">
           <BannerSlider tempoTrocaMs={5000} />
+          
+          <SantoDoDiaWidget />
         </div>
       </section>
 
-      {/* SEÇÃO: ÚLTIMAS NOTÍCIAS */}
+      {/* <section>
+        <GaleriaWidget />
+      </section> */}
+
       <section className="space-y-6">
         <div className="flex justify-between items-end border-b border-[#e4e4e7] dark:border-[#27272a] pb-3">
           <h3 className="text-2xl font-bold text-[#09090b] dark:text-[#fafafa] tracking-tight">
             Últimas Notícias
           </h3>
-          
-          <Link 
-            to="/noticias" 
+
+          <Link
+            to="/noticias"
             className="text-[#2563eb] hover:underline flex items-center gap-1 text-xs font-bold uppercase tracking-wider"
           >
             Arquivo completo <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {secundarias.map((item) => (
             <Link key={item.id} to={`/noticias/${item.slug || item.id}`} className="group">
               <Card className="h-full border border-[#e4e4e7] dark:border-[#27272a] bg-[#ffffff] dark:bg-[#18181b] overflow-hidden rounded-xl flex flex-col shadow-sm hover:shadow-md transition-shadow">
-                
+
                 <div className="relative aspect-[16/10] overflow-hidden bg-[#f4f4f5] dark:bg-[#27272a]">
-                  <img 
-                    src={item.imagem_capa_url!} 
-                    className="group-hover:scale-105 transition-transform duration-500 object-cover w-full h-full" 
+                  <img
+                    src={item.imagem_capa_url!}
+                    className="group-hover:scale-105 transition-transform duration-500 object-cover w-full h-full"
                     alt={item.titulo}
                   />
                   {item.categorias && (
@@ -123,7 +131,7 @@ export function HomePage() {
                       <Calendar className="w-3 h-3" />
                       <span>{new Date(item.data_publicacao || item.created_at || Date.now()).toLocaleDateString('pt-BR')}</span>
                     </div>
-                    
+
                     <CardTitle className="text-base font-bold leading-snug text-[#09090b] dark:text-[#fafafa] group-hover:text-[#2563eb] transition-colors line-clamp-2">
                       {item.titulo}
                     </CardTitle>

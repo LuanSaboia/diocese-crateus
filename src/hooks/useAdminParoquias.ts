@@ -66,7 +66,6 @@ export function useAdminParoquias() {
   }
 
   // Excluir Paróquia
-  // Em src/hooks/useAdminParoquias.ts
   const deleteParoquia = async (id: string) => {
     try {
       const { error } = await supabase.from('paroquias').delete().eq('id', id)

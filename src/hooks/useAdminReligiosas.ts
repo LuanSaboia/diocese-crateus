@@ -88,7 +88,6 @@ export function useAdminReligiosas() {
     }
   }
 
-  // CRUD Membros / Religiosas (Tabela `religiosas_membros`)
   const saveMembro = async (data: Partial<ReligiosaMembro>, id?: string) => {
     try {
       setSaving(true)
