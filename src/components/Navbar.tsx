@@ -60,17 +60,24 @@ export function Navbar() {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-white/95 dark:bg-zinc-950/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between gap-2">
 
-        {/* LOGO E BUSCA DESKTOP */}
-        <div className="flex items-center gap-8 lg:gap-12 flex-1">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
-            <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/m6L2KBLPVzCXW4Qn/diocese-logo-no-bk-personalizado-dOqZ2bQRjLfBZX2M.png" alt="Brasão" className="w-9 h-9 object-contain" />
-            <span className="font-bold text-lg hidden lg:inline-block whitespace-nowrap">
+        {/* LOGO + NOME DO PORTAL (EXIBE NO MOBILE E DESKTOP) */}
+        <div className="flex items-center gap-2 lg:gap-8 flex-1 overflow-hidden">
+          <Link to="/" className="flex items-center gap-2 shrink-0 max-w-full">
+            <img 
+              src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/m6L2KBLPVzCXW4Qn/diocese-logo-no-bk-personalizado-dOqZ2bQRjLfBZX2M.png" 
+              alt="Brasão" 
+              className="w-9 h-9 object-contain shrink-0" 
+            />
+            {/* O TEXTO AGORA APARECE TAMBÉM NO MOBILE */}
+            <span className="font-bold text-sm sm:text-base lg:text-lg whitespace-nowrap truncate">
               Diocese de <span className="text-primary">Crateús</span>
             </span>
           </Link>
-          <div className="hidden md:block w-full max-w-[350px]">
+
+          {/* BUSCA APENAS NO DESKTOP */}
+          <div className="hidden md:block w-full max-w-[320px]">
             <SearchCommand />
           </div>
         </div>
@@ -167,8 +174,8 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE NAV */}
-        <div className="md:hidden">
+        {/* MOBILE HAMBÚRGUER */}
+        <div className="md:hidden shrink-0">
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -178,21 +185,20 @@ export function Navbar() {
             <SheetContent side="right" className="w-[300px] sm:w-[350px] p-0">
               <div className="flex flex-col h-full bg-white dark:bg-zinc-950">
                 
-                {/* CABEÇALHO DO MENU MOBILE */}
+                {/* CABEÇALHO DO SHEET MOBILE */}
                 <div className="p-4 border-b flex items-center gap-2">
                   <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/m6L2KBLPVzCXW4Qn/diocese-logo-no-bk-personalizado-dOqZ2bQRjLfBZX2M.png" className="w-7 h-7 object-contain" alt="Logo" />
                   <span className="font-bold text-sm">Diocese de <span className="text-primary">Crateús</span></span>
                 </div>
 
-                {/* CORPO DO MENU COM BUSCA NO TOPO */}
+                {/* CORPO DO MENU MOBILE */}
                 <div className="flex-1 overflow-y-auto py-4 px-5 space-y-3">
                   
-                  {/* CAMPO DE BUSCA COMPACTO NO TOPO */}
+                  {/* CAMPO DE BUSCA COMPACTO NO TOPO DO MENU MOBILE */}
                   <div className="pb-2 border-b">
                     <SearchCommand />
                   </div>
 
-                  {/* LINKS DIRETOS */}
                   <Link to="/" onClick={() => setIsOpen(false)} className="block text-base font-medium hover:text-primary transition-colors border-b pb-2 pt-1">
                     Início
                   </Link>
@@ -205,10 +211,7 @@ export function Navbar() {
                     Notícias
                   </Link>
 
-                  {/* ACORDEÕES RECOLHÍVEIS PARA SUBMENUS */}
                   <Accordion type="single" collapsible className="w-full">
-
-                    {/* ACORDEÃO 1: A DIOCESE */}
                     <AccordionItem value="a-diocese" className="border-b">
                       <AccordionTrigger className="text-base font-medium py-2 hover:no-underline flex w-full justify-between items-center">
                         A Diocese <ChevronDown className="w-4 h-4 opacity-50 transition-transform duration-200" />
@@ -224,7 +227,6 @@ export function Navbar() {
                       </AccordionContent>
                     </AccordionItem>
 
-                    {/* ACORDEÃO 2: PARÓQUIAS */}
                     <AccordionItem value="paroquias" className="border-b">
                       <AccordionTrigger className="text-base font-medium py-2 hover:no-underline flex w-full justify-between items-center">
                         Paróquias <ChevronDown className="w-4 h-4 opacity-50 transition-transform duration-200" />
@@ -255,7 +257,6 @@ export function Navbar() {
                       </AccordionContent>
                     </AccordionItem>
 
-                    {/* ACORDEÃO 3: RELIGIOSAS */}
                     <AccordionItem value="religiosas" className="border-b">
                       <AccordionTrigger className="text-base font-medium py-2 hover:no-underline flex w-full justify-between items-center">
                         Congregações <ChevronDown className="w-4 h-4 opacity-50 transition-transform duration-200" />
